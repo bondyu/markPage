@@ -3,16 +3,29 @@
  * @author ginano
  * @date 20130217
  */
+/************************************
+ *工具类命名空间 
+ ************************************/
+var Util={};
 
+/***********************************
+ * 普通通用工具
+ **********************************/
+
+Util.Common={
+  log:function(str){
+      console && console.log && console.log(str);
+  } 
+};
 /************************************
  *异步加载资源文件工具 
  ************************************/
-var Util={
+Util.Loader={
   /**
    *加载js文件 
    * @param {Object} url
    */
-  ImportJS:function(url,callback,onerror){
+  importJS:function(url,callback,onerror){
         var head = document.getElementsByTagName("head")[0],
             script = document.createElement("script");
         script.type = "text/javascript";
@@ -21,7 +34,7 @@ var Util={
             if(onerror){
                 onerror(url);
             }else{
-                Util.Log('faild to load javascript file: "'+url+'"');
+                Util.Common.log('faild to load javascript file: "'+url+'"');
             }
         }, false);
         script.src = url;
@@ -31,7 +44,7 @@ var Util={
    *加载css文件 
    * @param {Object} url
    */
-  ImportCSS:function(url,callback,onerror){
+  importCSS:function(url,callback,onerror){
         var head = document.getElementsByTagName("head")[0],
             link = document.createElement("link");
         link.rel="stylesheet";
@@ -41,7 +54,7 @@ var Util={
             if(onerror){
                 onerror(url);
             }else{
-                Util.Log('faild to load css file: "'+url+'"');
+                Util.Common.log('faild to load css file: "'+url+'"');
             }
         }, false);
         link.href=url;
@@ -67,9 +80,9 @@ var Util={
            */
           load=function(url, done, error){
               if(/\.js(?:\s*)$/.test(url)){
-                  _self.ImportJS(url,done,error);
+                  _self.importJS(url,done,error);
               }else{
-                  _self.ImportCSS(url,done,error);
+                  _self.importCSS(url,done,error);
               }
           },
           orderLoad=function(){
@@ -97,18 +110,46 @@ var Util={
              });
          }
       }
-  },
-  Log:function(str){
-      console && console.log && console.log(str);
-  }  
+  } 
+};
+/***********************************************
+ * 路径判断
+ ***********************************************/
+Util.Url={
+    /**
+     *获取当前Url的 特征值
+     */
+    getCharacter:function(){
+        var url=window.location,
+            domain=url.hostname,
+            //port=url.port,
+            path=url.pathname;
+        //detail页需要特殊处理
+        if(/detail(?:\-test)?\.china\.alibaba\.com(?::\d+)?\/offer\/\d+\.html/.test(url)){
+            return 'detail.china.alibaba.com/offer/detail.html';
+        }    
+        return character=domain+path;
+    },
+    /**
+     *获取当前的指令状态 
+     */
+    getCommands:function(){
+        var cmd=window.location.hash,
+            len=cmd.length-1;
+        if(len>1){
+            return cmd.substr(1,cmd.length-1);
+        }else{
+            return null;
+        }
+    }
 };
 
-
+Util.Common.log(Util.Url.getCommands());
 /**
  *入口函数 
  */
 var done=function(){
-    Util.asyncLoad([
+    Util.Loader.asyncLoad([
         '../css/dialog.css',   //对话框基本样式
         '../css/toolbar.css',  //页面工具条样式
         '../css/tag.css',      //基本标签样式
@@ -124,7 +165,7 @@ var done=function(){
         '../js/init.js'
     ],function(){
         
-    },false);
+    },true);
 };
 /**
  *如果是已经加载了jquery框架的 
@@ -132,7 +173,7 @@ var done=function(){
 if(window.FE){
     done();
 }else{
-    Util.asyncLoad(['http://style.china.alibaba.com/fdevlib/js/fdev-v4/core/fdev-min.js'],function(){
+    Util.Loader.asyncLoad(['http://style.china.alibaba.com/fdevlib/js/fdev-v4/core/fdev-min.js'],function(){
         done();
     });
 }
