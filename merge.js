@@ -150,19 +150,22 @@ Util.Common.log(Util.Url.getCommands());
  */
 var done=function(){
     Util.Loader.asyncLoad([
-        '../css/dialog.css',   //对话框基本样式
-        '../css/toolbar.css',  //页面工具条样式
-        '../css/tag.css',      //基本标签样式
-        '../css/newtag.css',   //新建标签样式
-        '../css/mouseright.css',   //鼠标右键样式
-        '../js/core.js',
-        '../js/notify.js',
-        '../js/mvc.js',
-        '../js/class.js',
-        '../js/tag/view.js',
-        '../js/tag/controller.js',
-        '../js/tag/model.js',
-        '../js/init.js'
+        'http://ali-54473/markpage/css/common.css',   //基本样式
+        'http://ali-54473/markpage/css/dialog.css',   //对话框基本样式
+        'http://ali-54473/markpage/css/toolbar.css',  //页面工具条样式
+        'http://ali-54473/markpage/css/tag.css',      //基本标签样式
+        'http://ali-54473/markpage/css/newtag.css',   //新建标签样式
+        'http://ali-54473/markpage/css/mouseright.css',   //鼠标右键样式
+        'http://ali-54473/markpage/js/core.js',
+        'http://ali-54473/markpage/js/notify.js',
+        'http://ali-54473/markpage/js/rightmenu.js',
+        'http://ali-54473/markpage/js/toolbar.js',
+        'http://ali-54473/markpage/js/mvc.js',
+        'http://ali-54473/markpage/js/class.js',
+        'http://ali-54473/markpage/js/tag/view.js',
+        'http://ali-54473/markpage/js/tag/controller.js',
+        'http://ali-54473/markpage/js/tag/model.js',
+        'http://ali-54473/markpage/js/init.js'
     ],function(){
         
     },true);

@@ -1,0 +1,18 @@
+.markpage{
+	position: absolute;
+	top:0;
+	left:0;
+}
+.rightmenu{
+	position: absolute;
+	top:0;
+	left:0;
+	display:none;
+	padding:8px;
+	background-color: #f8f8f8;
+	border:1px solid #ddd;
+	z-index: 999;
+}
+.rightmenu .menuitem{
+	line-height:32px;
+}
