@@ -1,0 +1,49 @@
+(function(Tool){
+    Tool.Template={
+        //普通对话框的基本模版
+        dialog:'<div class="dialog">\
+                <h2 class="header">默认标题</h2>\
+                <div class="content">默认内容</div>\
+                <div class="footer fd-clr">\
+                    <div class="fd-right panel">\
+                        <a href="#" class="button confirm">确定</a>\
+                        <a href="#" class="button close">取消</a>\
+                    </div>\
+                </div>\
+             </div>',
+        //工具条的模版
+        toolbar:'<div class="toolbar">\
+                    <div class="op-panel">\
+                        <a class="button initmarks" href="#">展示所有标签</a>\
+                        <a class="button hidemarks" href="#">隐藏所有标签</a>\
+                        <a class="button set-page-paras" href="#">设置页面参数</a>\
+                    </div>\
+                 </div>',
+        //页面设置对话框模版
+        pageSettingDialog:'<div class="setting-list">\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text" readonly="readonly" class="input-text character-url"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面宽度:</dt><dd><input type="text" class="input-text page-width"/>&nbsp;px</dd></dl>\
+                  </div>',
+        //添加普通标签对话框模版
+        newNormalTag:'<div class="setting-list">\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text"  class="input-text character-url"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text"  class="input-text character-url"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text"  class="input-text character-url"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text"  class="input-text character-url"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面宽度:</dt><dd><input type="text" class="input-text page-width"/>&nbsp;px</dd></dl>\
+                  </div>',
+        //添加普通标签对话框模版
+        newEventTag:'<div class="setting-list">\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text"  class="input-text page-width"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text"  class="input-text page-width"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text"  class="input-text page-width"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text"  class="input-text page-width"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面宽度:</dt><dd><input type="text" class="input-text page-width"/>&nbsp;px</dd></dl>\
+                  </div>',
+        //普通标签
+        normalTag:'<div class="setting-list">\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd>我不告诉你的一切的了</dd></dl>\
+                    <dl class="fd-clr"><dt>页面宽度:</dt><dd>990&nbsp;px</dd></dl>\
+                  </div>'
+    };
+})(Util);

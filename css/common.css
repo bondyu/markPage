@@ -2,7 +2,23 @@
 	position: absolute;
 	top:0;
 	left:0;
+	z-index: 2000;
 }
+.markpage .button{
+	height: 20px;
+	margin-right: 3px;
+	background-color: rgb(40, 159, 175);
+	text-shadow: 0 -1px 0 rgba(0, 188, 204, 0.25);
+	text-decoration:none;
+	cursor: pointer;
+	display: inline-block;
+	padding: 4px 10px 4px;
+	font-size: 13px;
+	line-height: 18px;
+	color: #ffffff;
+	border-radius: 3px;
+}
+
 .rightmenu{
 	position: absolute;
 	top:0;
@@ -11,8 +27,16 @@
 	padding:8px;
 	background-color: #f8f8f8;
 	border:1px solid #ddd;
-	z-index: 999;
+	z-index: 9999;
 }
 .rightmenu .menuitem{
 	line-height:32px;
+}
+
+
+.input-text{
+	height: 22px;
+	vertical-align: middle;
+	background: url(http://img.china.alibaba.com/images/common/icon_v02/bg5.gif) repeat-x;
+	border: 1px solid #a0a0a0;
 }

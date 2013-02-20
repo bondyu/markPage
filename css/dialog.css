@@ -1,0 +1,80 @@
+.dialog{
+	display: none;
+	position:absolute;
+	z-index: 3000;
+	background: #fff;
+	border: 8px solid #999;
+}
+.dialog.move{
+	cursor:move;
+	opacity: 0.8;
+}
+
+.dialog .header{
+	height: 32px;
+    line-height: 32px;
+    background-color: #f0f0f0;
+    padding-left: 12px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.dialog.move .header{
+	cursor: move;
+}
+.dialog .content{
+	padding:8px;
+}
+.dialog .footer{
+    zoom: 1;
+    padding:8px;
+    background-color: #fff;
+    border: 1px solid #f0f0f0;
+}
+.dialog .button{
+	vertical-align: middle;
+    cursor: pointer;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #b3b3b3 #b3b3b3 #9a9a9a;
+    text-align: center;
+    
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    
+    height: 24px;
+    line-height: 23px;
+    background-color: #f0f0f0;
+    padding: 0 12px;
+    color: #444 !important;
+    
+    background-image: -moz-linear-gradient(top, #fcfcfc, #e4e4e4);
+    background-image: -ms-linear-gradient(top, #fcfcfc, #e4e4e4);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fcfcfc), to(#e4e4e4));
+    background-image: -webkit-linear-gradient(top, #fcfcfc, #e4e4e4);
+    background-image: -o-linear-gradient(top, #fcfcfc, #e4e4e4);
+    background-image: linear-gradient(top, #fcfcfc, #e4e4e4);
+}
+/**
+ * 	设置页面参数的对话框
+ */
+.dialog .setting-list{
+}
+.dialog .setting-list dl{
+	padding:4px;
+}
+.dialog .setting-list dt{
+	float:left;
+	width:70px;
+	padding-right:8px;
+	text-align:right;
+}
+.dialog .setting-list dd{
+	float:left;
+}
+.dialog .setting-list .character-url{
+	width: 200px;
+}

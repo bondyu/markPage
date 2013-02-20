@@ -116,20 +116,7 @@ Util.Loader={
  * 路径判断
  ***********************************************/
 Util.Url={
-    /**
-     *获取当前Url的 特征值
-     */
-    getCharacter:function(){
-        var url=window.location,
-            domain=url.hostname,
-            //port=url.port,
-            path=url.pathname;
-        //detail页需要特殊处理
-        if(/detail(?:\-test)?\.china\.alibaba\.com(?::\d+)?\/offer\/\d+\.html/.test(url)){
-            return 'detail.china.alibaba.com/offer/detail.html';
-        }    
-        return character=domain+path;
-    },
+    
     /**
      *获取当前的指令状态 
      */
@@ -156,8 +143,12 @@ var done=function(){
         'http://ali-54473/markpage/css/tag.css',      //基本标签样式
         'http://ali-54473/markpage/css/newtag.css',   //新建标签样式
         'http://ali-54473/markpage/css/mouseright.css',   //鼠标右键样式
-        'http://ali-54473/markpage/js/core.js',
+        'http://ali-54473/markpage/js/data.js',         //存储数据用
         'http://ali-54473/markpage/js/notify.js',
+        'http://ali-54473/markpage/js/template.js',     //所有的页面模版
+        'http://ali-54473/markpage/js/core.js',
+        'http://ali-54473/markpage/js/dialog.js',
+        'http://ali-54473/markpage/js/tag.js',       //标签构造类
         'http://ali-54473/markpage/js/rightmenu.js',
         'http://ali-54473/markpage/js/toolbar.js',
         'http://ali-54473/markpage/js/mvc.js',
@@ -176,7 +167,9 @@ var done=function(){
 if(window.FE){
     done();
 }else{
-    Util.Loader.asyncLoad(['http://style.china.alibaba.com/fdevlib/js/fdev-v4/core/fdev-min.js'],function(){
+    Util.Loader.asyncLoad([
+        'http://style.china.alibaba.com/fdevlib/js/fdev-v4/core/fdev-min.js',
+        'http://style.china.alibaba.com/fdevlib/css/fdev-v4/core/fdev-wide.css'],function(){
         done();
     });
 }
