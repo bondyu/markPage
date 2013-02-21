@@ -6,8 +6,8 @@
                 <div class="content">默认内容</div>\
                 <div class="footer fd-clr">\
                     <div class="fd-right panel">\
-                        <a href="#" class="button confirm">确定</a>\
-                        <a href="#" class="button close">取消</a>\
+                        <a href="#" class="button" data-button="confirm">确定</a>\
+                        <a href="#" class="button" data-button="close">取消</a>\
                     </div>\
                 </div>\
              </div>',
@@ -44,6 +44,13 @@
         normalTag:'<div class="setting-list">\
                     <dl class="fd-clr"><dt>页面特征Url:</dt><dd>我不告诉你的一切的了</dd></dl>\
                     <dl class="fd-clr"><dt>页面宽度:</dt><dd>990&nbsp;px</dd></dl>\
-                  </div>'
+                  </div>',
+        //默认操作栏
+        defaultOpbar:'<a href="#" class="button" data-button="confirm">确定</a>\
+                      <a href="#" class="button" data-button="cancel">取消</a>',
+        //标签操作栏
+        tagOpbar:'<a href="#" class="button" data-button="edit">编辑</a>\
+                  <a href="#" class="button" data-button="delete">删除</a>\
+                  <a href="#" class="button" data-button="close">隐藏</a>'
     };
 })(Util);

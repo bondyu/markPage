@@ -18,7 +18,8 @@
     font-size: 14px;
     font-weight: bold;
 }
-.dialog.move .header{
+.dialog.move .header,
+.dialog.dialog-drag .header{
 	cursor: move;
 }
 .dialog .content{

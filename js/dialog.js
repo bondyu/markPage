@@ -10,6 +10,7 @@
         this.dom=$(html).appendTo($('body')).css('z-index',++zindex);
         this.eventFun={};
         this.isDrag=isDrag;
+        isDrag&&this.dom.addClass('dialog-drag');
         this.bind();
         //存储起来
         this.id=DialogList.length;
@@ -117,17 +118,27 @@
         },
         bind:function(){
             var self=this;
-            this.dom.on('click','.confirm',function(e){
+            this.dom.on('click','[data-button]',function(e){
                 e.preventDefault();
-                self.eventFun['confirm']&&self.eventFun['confirm']();
-            })
-            .on('click','.close',function(e){
-                e.preventDefault();
-                self.eventFun['close']&&self.eventFun['close']();
+                var type=$(this).data('button');
+                self.eventFun[type]&&self.eventFun[type]();
             })
             //拖拽功能
             .on('mousedown','h2.header',self,self.mouseDown);
             
+        },
+        /**
+         *销毁对话框 
+         */
+        destroy:function(){
+            var self=this;
+            this.dom.off('click')
+                    .off('mousedown','h2.header');
+            this.eventFun={};
+            this.isDrag=null;
+            DialogList.splice(DialogList.indexOf(this),1);
+            this.id=null;
+            this.dom.remove();
         }
     };
   Tool.Dialog=Dialog;
