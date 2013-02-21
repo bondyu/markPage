@@ -51,6 +51,6 @@
         //±êÇ©²Ù×÷À¸
         tagOpbar:'<a href="#" class="button" data-button="edit">±à¼­</a>\
                   <a href="#" class="button" data-button="delete">É¾³ý</a>\
-                  <a href="#" class="button" data-button="close">Òþ²Ø</a>'
+                  <a href="#" class="button" data-button="fold">ÊÕÆð</a>'
     };
 })(Util);

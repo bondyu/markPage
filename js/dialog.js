@@ -23,7 +23,7 @@
          * @param {Object} body
          */
         setTemplate:function(title,body,foot){
-           'string' === typeof title && this.dom.find('h2.header').text(title);
+           'string' === typeof title && this.dom.find('h2.header').html(title);
            'string' === typeof body && this.dom.find('div.content').html(body);
            'string' === typeof foot && this.dom.find('div.footer div.panel').html(foot);
             return this;
@@ -73,6 +73,7 @@
             doc.unbind('mousemove',self.mouseMove)
                 .unbind('mouseup',self.mouseUp)
                 .unbind('selectstart',self.disableSelect); ;
+            self.eventFun['dragend']&&self.eventFun['dragend']();
         },
         mouseMove:function(params){
             var self=params.data,
@@ -87,6 +88,7 @@
                 });
             
            self.__mousepoint__=pos; 
+           self.eventFun['dragging']&&self.eventFun['draging']();
         },
         mouseDown:function(params){
             var self=params.data,
@@ -109,6 +111,7 @@
                 doc.bind('mousemove',self,self.mouseMove) 
                    .bind('mouseup',self,self.mouseUp)
                    .bind('selectstart',self.disableSelect);  
+                self.eventFun['dragstart']&&self.eventFun['dragstart']();
            // },500);
             
         },

@@ -7,7 +7,7 @@
 }
 .dialog.move{
 	cursor:move;
-	opacity: 0.8;
+	opacity: 0.4!important;
 }
 
 .dialog .header{
@@ -21,6 +21,30 @@
 .dialog.move .header,
 .dialog.dialog-drag .header{
 	cursor: move;
+}
+.dialog.dialog-tag-fold{
+	border:1px solid #A0A0A0;
+	opacity:0.8;
+}
+.dialog .header .button,
+.dialog.dialog-tag-fold .content,
+.dialog.dialog-tag-fold .footer{
+	display:none;
+}
+.dialog.dialog-tag-event.dialog-tag-fold .header{
+	background-color:#ACE1AF;
+}
+.dialog.dialog-tag-fold .header{
+	background-color:#FFA07B;
+}
+.dialog.dialog-tag-fold .header .button{
+	display: inline-block;
+	border: none;
+	background: none;
+	font-size: 12px;
+	color: #369!important;
+	margin-left: 20px;
+	font-weight: normal;
 }
 .dialog .content{
 	padding:8px;

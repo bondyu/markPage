@@ -133,7 +133,10 @@
         e.preventDefault();
         getNewDialog().setTemplate('新建普通标签',Tool.Template.newNormalTag)
                       .setEvent('confirm',function(){
-                          alert(1);
+                          var tag=new Tag();
+                          tag.show()
+                             .setPosition(Tool.Menu.getCurrentRealPosition());
+                          getNewDialog().hide();
                       })
                       .setPosition(Tool.Menu.getCurrentRealPosition())
                       .show();
@@ -143,7 +146,9 @@
         e.preventDefault();
         getNewDialog().setTemplate('新建事件标签',Tool.Template.newEventTag)
                       .setEvent('confirm',function(){
-                          var tag=new Tag();
+                          var tag=new Tag({
+                              isEvent:true
+                          });
                           tag.show()
                              .setPosition(Tool.Menu.getCurrentRealPosition());
                           getNewDialog().hide();
