@@ -18,6 +18,20 @@
     font-size: 14px;
     font-weight: bold;
 }
+.dialog .header .title{
+	margin-right:20px;
+	float:left;
+}
+.dialog .header .resize-bar{display:none;}
+.dialog.dialog-tag-fold .header .resize-bar{
+	display:inline-block;
+	height:8px;
+	width: 8px;
+	position: absolute;
+	right:0;
+	bottom:0;
+	cursor:se-resize;
+}
 .dialog.move .header,
 .dialog.dialog-drag .header{
 	cursor: move;
@@ -31,20 +45,25 @@
 .dialog.dialog-tag-fold .footer{
 	display:none;
 }
-.dialog.dialog-tag-event.dialog-tag-fold .header{
+.dialog.dialog-tag-event.dialog-tag-fold{
 	background-color:#ACE1AF;
 }
-.dialog.dialog-tag-fold .header{
+.dialog.dialog-tag-fold{
 	background-color:#FFA07B;
 }
+.dialog.dialog-tag-fold .header{
+	background:none;
+	height:100%;
+	text-align:right}
 .dialog.dialog-tag-fold .header .button{
 	display: inline-block;
 	border: none;
 	background: none;
 	font-size: 12px;
 	color: #369!important;
-	margin-left: 20px;
+	margin-left:10px;
 	font-weight: normal;
+	padding:0 6px;
 }
 .dialog .content{
 	padding:8px;
@@ -53,7 +72,7 @@
     zoom: 1;
     padding:8px;
     background-color: #fff;
-    border: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
 }
 .dialog .button{
 	vertical-align: middle;

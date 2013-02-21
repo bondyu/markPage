@@ -145,6 +145,20 @@
                 return left;
             },
             /**
+             *根据页面相对水平位置获得当前页面的真是位置
+             */
+            originLeft:function(currentLeft){
+                var _width=this.getPageWidth(),
+                    screenWidth=document.body.clientWidth,
+                    left;
+                if(_width<screenWidth){
+                    left=(currentLeft+(screenWidth-_width)/2).toFixed(0)-0;
+                }else{
+                    left=currentLeft;
+                }
+                return left;    
+            },
+            /**
              *获取元素的相对居中位置 
             * @param {jQuery} el
              */

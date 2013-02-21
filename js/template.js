@@ -45,6 +45,11 @@
                     <dl class="fd-clr"><dt>页面特征Url:</dt><dd>我不告诉你的一切的了</dd></dl>\
                     <dl class="fd-clr"><dt>页面宽度:</dt><dd>990&nbsp;px</dd></dl>\
                   </div>',
+        //默认标题
+        defaultTitle:'<span class="title">标签</span>\
+                      <a href="#" class="button" data-button="expand">展开</a>\
+                      <a href="#" class="button" data-button="delete">删除</a>\
+                      <span href="#" class="resize-bar"></span>',
         //默认操作栏
         defaultOpbar:'<a href="#" class="button" data-button="confirm">确定</a>\
                       <a href="#" class="button" data-button="cancel">取消</a>',

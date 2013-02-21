@@ -6,10 +6,11 @@
         DialogList=[],
         //从3000开始计算
         zindex=2999;
-    var Dialog=function(isDrag){
+    var Dialog=function(isDrag,resizable){
         this.dom=$(html).appendTo($('body')).css('z-index',++zindex);
         this.eventFun={};
         this.isDrag=isDrag;
+        this.resizable=resizable;
         isDrag&&this.dom.addClass('dialog-drag');
         this.bind();
         //存储起来
@@ -28,8 +29,8 @@
            'string' === typeof foot && this.dom.find('div.footer div.panel').html(foot);
             return this;
         },
-        setCenter:function(params){
-            var self=(params && params.data)||this,
+        setCenter:function(){
+            var self=this,
                 win=$(window),
                 dom=self.dom;
             dom.css({
@@ -38,14 +39,21 @@
             });
             return self;
         },
+        /**
+         *重新设置位置，各种情况导致的 
+         */
+        resetPosition:function(params){
+            var self=(params && params.data)||this;
+            self.setCenter();
+        },
         show:function(){
             this.dom.show();
-            $(window).on('resize',this,this.setCenter);
+            $(window).on('resize',this,this.resetPosition);
             return this;
         },
         hide:function(){
             this.dom.hide();
-            $(window).off('resize',this.setCenter);
+            $(window).off('resize',this.resetPosition);
             return this;
         },
         setEvent:function(evenName,fun){
@@ -115,6 +123,57 @@
            // },500);
             
         },
+        resizeStart:function(params){
+            //阻止事件冒泡到title上面去
+            params.preventDefault();
+            
+            var self=params.data,
+                dom=self.dom,
+                doc=$(document);
+            if(!self.resizable){
+                return false;
+            }
+            //记录当前点击下的位置
+            self.__mousepoint__=self.getMousePosition(params);
+            doc.bind('mousemove',self,self.resize) 
+               .bind('mouseup',self,self.resizeEnd)
+               .bind('selectstart',self.disableSelect);  
+            self.eventFun['resizestart']&&self.eventFun['resizestart']();
+            return false;
+        },
+        resize:function(params){
+            var self=params.data,
+                dom=self.dom,
+                pos=self.getMousePosition(params),
+                last=self.__mousepoint__,
+                nowWidth=dom.width(),
+                nowHeight=dom.height(),
+                _width,_height;
+            _width=nowWidth+(pos.left-last.left);
+            _height=nowHeight+pos.top-last.top;
+            //最小值
+            _width=_width<160?160:_width;
+            _height=_height<30?30:_height;
+            self.setSize({
+                    width:_width,
+                    height:_height
+                });
+           self.__mousepoint__=pos; 
+           self.eventFun['resizing']&&self.eventFun['resizing']();
+        },
+        resizeEnd:function(params){
+            var self=params.data,
+                dom=self.dom,
+                doc=$(document);
+            doc.unbind('mousemove',self.resize)
+                .unbind('mouseup',self.resizeEnd)
+                .unbind('selectstart',self.disableSelect); ;
+            self.eventFun['resizeend']&&self.eventFun['resizeend']();
+        },
+        setSize:function(size){
+            this.dom.width(size.width);
+            this.dom.height(size.height);
+        },
         disableSelect:function(e){
             e.preventDefault();
             return false;
@@ -127,7 +186,8 @@
                 self.eventFun[type]&&self.eventFun[type]();
             })
             //拖拽功能
-            .on('mousedown','h2.header',self,self.mouseDown);
+            .on('mousedown','h2.header',self,self.mouseDown)
+            .on('mousedown','.resize-bar',self,self.resizeStart);
             
         },
         /**
