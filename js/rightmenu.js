@@ -133,7 +133,9 @@
         e.preventDefault();
         getNewDialog().setTemplate('新建普通标签',Tool.Template.newNormalTag)
                       .setEvent('confirm',function(){
-                          var tag=new Tag();
+                          var dialog=getNewDialog(),
+                              tagData=dialog.serializeInput();
+                          var tag=new Tag(tagData);
                           tag.show()
                              .setPosition(Tool.Menu.getCurrentRealPosition());
                           getNewDialog().hide();
@@ -146,9 +148,9 @@
         e.preventDefault();
         getNewDialog().setTemplate('新建事件标签',Tool.Template.newEventTag)
                       .setEvent('confirm',function(){
-                          var tag=new Tag({
-                              isEvent:true
-                          });
+                          var dialog=getNewDialog(),
+                              tagData=dialog.serializeInput();
+                          var tag=new Tag(tagData);
                           tag.show()
                              .setPosition(Tool.Menu.getCurrentRealPosition());
                           getNewDialog().hide();

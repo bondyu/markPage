@@ -11,7 +11,6 @@
 }
 
 .dialog .header{
-	height: 32px;
     line-height: 32px;
     background-color: #f0f0f0;
     padding-left: 12px;
@@ -19,18 +18,26 @@
     font-weight: bold;
 }
 .dialog .header .title{
-	margin-right:20px;
-	float:left;
+	display:inline-block;
+	overflow:hidden;
 }
 .dialog .header .resize-bar{display:none;}
 .dialog.dialog-tag-fold .header .resize-bar{
-	display:inline-block;
-	height:8px;
-	width: 8px;
+	display: inline-block;
+	height: 12px;
+	width: 7px;
 	position: absolute;
-	right:0;
-	bottom:0;
-	cursor:se-resize;
+	right: 0;
+	bottom: 0;
+	cursor: se-resize;
+	padding-left: 8px;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: normal;
+	font-family: arial;
+	-webkit-transform: rotate(20deg);
+	line-height: 14px;
+	letter-spacing: -1px;
 }
 .dialog.move .header,
 .dialog.dialog-drag .header{
@@ -53,17 +60,17 @@
 }
 .dialog.dialog-tag-fold .header{
 	background:none;
-	height:100%;
-	text-align:right}
+	overflow:hidden;
+}
 .dialog.dialog-tag-fold .header .button{
 	display: inline-block;
 	border: none;
 	background: none;
 	font-size: 12px;
 	color: #369!important;
-	margin-left:10px;
 	font-weight: normal;
 	padding:0 6px;
+	line-height: 24px;
 }
 .dialog .content{
 	padding:8px;
@@ -112,7 +119,7 @@
 }
 .dialog .setting-list dt{
 	float:left;
-	width:70px;
+	width:100px;
 	padding-right:8px;
 	text-align:right;
 }

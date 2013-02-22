@@ -83,18 +83,26 @@
                 .unbind('selectstart',self.disableSelect); ;
             self.eventFun['dragend']&&self.eventFun['dragend']();
         },
+        /**
+         *移动偏差距离 
+         */
+        moveOffset:function(scale){
+            var now=this.dom.offset();
+            this.setPosition({
+                    left:now.left+scale.x,
+                    top:now.top+scale.y
+                });
+           return this;
+        },
         mouseMove:function(params){
             var self=params.data,
-                dom=self.dom,
-                
                 pos=self.getMousePosition(params),
-                last=self.__mousepoint__,
-                now=dom.offset();
-            dom.css({
-                    left:now.left+(pos.left-last.left),
-                    top:now.top+pos.top-last.top
-                });
-            
+                last=self.__mousepoint__;
+                
+            self.moveOffset({
+                x:pos.left-last.left,
+                y:pos.top-last.top
+            });
            self.__mousepoint__=pos; 
            self.eventFun['dragging']&&self.eventFun['draging']();
         },
@@ -107,9 +115,9 @@
             //    clearTimeout(timer);
            // }
             //timer=setTimeout(function(){
-                if(dom.css('z-index')-0<zindex){
-                    dom.css('z-index',++zindex);
-                }
+                //置顶操作
+                self.setTop();
+                
                 if(!self.isDrag){
                     return;
                 }
@@ -122,6 +130,25 @@
                 self.eventFun['dragstart']&&self.eventFun['dragstart']();
            // },500);
             
+        },
+        /**
+         *调整大小偏移 
+         */
+        resizeOffset:function(scale){
+            var dom=this.dom,
+                nowWidth=dom.width(),
+                nowHeight=dom.height(),
+                 _width,_height;
+            _width=nowWidth+scale.x;
+            _height=nowHeight+scale.y;
+            
+            _width=_width<160?160:_width;
+            _height=_height<30?30:_height;
+            this.setSize({
+                    width:_width,
+                    height:_height
+                });
+            return this;
         },
         resizeStart:function(params){
             //阻止事件冒泡到title上面去
@@ -143,21 +170,13 @@
         },
         resize:function(params){
             var self=params.data,
-                dom=self.dom,
                 pos=self.getMousePosition(params),
-                last=self.__mousepoint__,
-                nowWidth=dom.width(),
-                nowHeight=dom.height(),
-                _width,_height;
-            _width=nowWidth+(pos.left-last.left);
-            _height=nowHeight+pos.top-last.top;
-            //最小值
-            _width=_width<160?160:_width;
-            _height=_height<30?30:_height;
-            self.setSize({
-                    width:_width,
-                    height:_height
-                });
+                last=self.__mousepoint__;
+                
+            self.resizeOffset({
+                x:pos.left-last.left,
+                y:pos.top-last.top
+            });
            self.__mousepoint__=pos; 
            self.eventFun['resizing']&&self.eventFun['resizing']();
         },
@@ -171,12 +190,32 @@
             self.eventFun['resizeend']&&self.eventFun['resizeend']();
         },
         setSize:function(size){
-            this.dom.width(size.width);
-            this.dom.height(size.height);
+           size.width && this.dom.width(size.width);
+           size.height && this.dom.height(size.height);
+        },
+        /**
+         *置顶 
+         */
+        setTop:function(){
+            var dom=this.dom;
+            if(dom.css('z-index')-0<zindex){
+                dom.css('z-index',++zindex);
+            }
+            return this; 
         },
         disableSelect:function(e){
             e.preventDefault();
             return false;
+        },
+        serializeInput:function(){
+            var inputs=this.dom.find('input.tag-key'),
+                datas={};
+            inputs.each(function(){
+                var $this=$(this),
+                    key=$this.data('key');
+                datas[key]=$this.val();
+            });
+            return datas;
         },
         bind:function(){
             var self=this;

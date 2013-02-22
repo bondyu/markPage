@@ -54,9 +54,17 @@
                 e.preventDefault();
                 var thedialog=self.getSettingDialog(),
                     dom=thedialog.dom;
-                thedialog.show().setCenter();
+                thedialog.show().setCenter().setTop();
                 dom.find('input.character-url').val(Tool.Core.getCharacter());
                 dom.find('input.page-width').val(Tool.Core.getPageWidth());
+            })
+            .on('click','a.initmarks',function(e){
+                e.preventDefault();
+                $('div.mark-tag').show();
+            })
+            .on('click','a.hidemarks',function(e){
+                e.preventDefault();
+                $('div.mark-tag').hide();
             });
         }
     };
