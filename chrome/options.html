@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>设置</title>
+</head>
+<style>
+	.fd-clr{zoom:1;}
+	.fd-clr:after{content:"\0020";display:block;height:0;clear:both;}
+	
+	body{font-family:\5FAE\8F6F\96C5\9ED1,\9ED1\4F53,\6587\6CC9\9A7F\6B63\9ED1\4F53,\534E\6587\7EC6\9ED1;font-size:12px;}
+		
+	a:link,a:visited{
+		color:#00E;
+	}
+	
+	a:hover{
+		color:#FF7300;
+	}
+	
+	#doc{
+		width:600px;
+		margin:20px auto;
+		border:1px solid #CCC;
+		border-radius:4px;
+		padding:20px;
+	}
+	
+	.title .logo{
+		float:left;
+		padding-right:12px;
+		border-right:1px solid #CCC;
+	}
+	
+	.title .ani{-webkit-transition: all 0.25s ease-in-out;}
+	.title .ani:hover{-webkit-transform: rotate(2deg);}
+	
+	.title .text{
+		float:left;
+		color:#666;
+		padding-left:12px;
+	}
+	
+	.title h1,.title p{
+		margin:0;
+		padding:0;
+		font-weight:400;
+		line-height:1.5em;
+	}
+	
+	.content{
+		padding-top:24px;
+	}
+	
+	.info{
+		position:absolute;
+		width:100%;
+		height:36px;
+		top:-32px;
+		left:0;
+	}
+	
+	.info .text{
+		width:120px;
+		height:36px;
+		line-height:36px;
+		font-size:20px;
+		color:#FFF;
+		margin:0 auto;
+		background:#FF7300;
+		text-align:center;
+		border-bottom-right-radius: 8px;
+		border-bottom-left-radius: 8px;
+	}
+	
+	input:focus{
+		border-color: #FF7300;
+	}
+	
+	#button{
+		margin-top:12px;
+	}
+	
+</style>
+<body>
+	<div id="doc">
+		<div class="title fd-clr">
+			<div class="logo">
+				<div class="ani">
+					<img src="logo.png"/>
+				</div>
+			</div>
+			<div class="text">
+				<h1>设置</h1>
+				<p>Chrome一键登录插件</p>
+			</div>
+		</div>
+		<hr>
+		<div class="content">
+			<form>
+				<table id="account-list">
+					<thead>
+						<tr>
+							<td>用户名</td>
+							<td>密码</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<div id="button">
+					<button id="save">保存</button><button id="new">新增</button>
+				</div>
+			</form>
+		</div>
+		<div class="info">
+			<div class="text">
+				保存成功
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+	jQuery.namespace('FE.util.fastLogin');
+
+	(function($,FL){
+		$.extend(FL,{
+			//新建用户function
+			newItem:function(){
+				var tbody = $('#account-list').find('tbody');
+				tbody.append('<tr class="account"><td><input type="text"/></td><td><input type="password"/></td><td><a class="del" href="#">删除</a></tr>');
+			},
+			//读取设置function
+			restore:function(){
+				var
+				html = '',
+				tbody = $('#account-list').find('tbody'),
+				a = this.getAccountData();
+				
+				$.each(a,function(index,o){
+					html+='<tr class="account"><td><input type="text" value="'+o.name+'"/></td><td><input type="password" value="'+o.pass+'"/></td><td><a class="del" href="#">删除</a></tr>';
+				});	
+				tbody.append(html);
+				this.newItem();
+				return true;
+			},
+			//保存设置function
+			save:function(){
+				var a = [],
+				trs = $('tr.account');
+				
+				trs.each(function(index,tr){
+					var
+					o = {},
+					name = $(tr).find('input:text').val()||'',
+					pass = $(tr).find('input:password').val()||'';
+					
+					if(name){
+						o.name = name;
+						o.pass = pass;
+						a.push(o);
+					}
+				});
+				
+				this.setAccountData(a);
+				return true;
+			},
+			
+			init:function(){
+				//保存
+				FL = this;
+				$('#save').click(function(e){
+					e.preventDefault();
+					FL.save();
+					$('.info').clearQueue().animate({top:"0px"}).delay(3000).animate({top:"-32px"});
+				});
+				//新建用户
+				$('#new').click(function(e){
+					e.preventDefault();
+					FL.newItem();
+				});
+				//删除用户
+				$('table').delegate('.del','click',function(e){
+					e.preventDefault();
+					$(this).closest('tr').remove();
+					//如果一个用户都没了，自动新建一个用户
+					if($('#account-list').find('tbody').find('tr').length===0){
+						FL.newItem();
+					}
+				});
+				FL.restore();
+			}
+		});
+		
+		$(function(){
+			FL.init();
+		});
+	})(jQuery,FE.util.fastLogin);
+	</script>
+</body>
+</html>
