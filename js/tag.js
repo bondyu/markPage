@@ -17,48 +17,48 @@
                  dom=self.dom,
                  data=this.getData(),
                  html;
-             //ÉèÖÃÄ£°æÄÚÈİ
+             //è®¾ç½®æ¨¡ç‰ˆå†…å®¹
              tagDetailHtml=data.isEvent? Template.eventTag:Template.normalTag;   
              tagEditHtml=data.isEvent? Template.newEventTag:Template.newNormalTag;   
              this.setTemplate(Template.defaultTitle,tagDetailHtml, Template.tagOpbar);
              /**
-              *Ôö¼ÓÊÂ¼ş±êÇ©ÑùÊ½ 
+              *å¢åŠ äº‹ä»¶æ ‡ç­¾æ ·å¼ 
               */
              if(data.isEvent){
                  dom.addClass('dialog-tag-event');
              }
-             //Éè¶¨Î»ÖÃ
+             //è®¾å®šä½ç½®
              if(data.pos){
                  this.setPosition({
                      left:Core.originLeft(data.pos.left),
                      top:data.pos.top
                  });
              }
-             //Éè¶¨´óĞ¡
+             //è®¾å®šå¤§å°
              if(data.size){
                  this.setSize(data.size);
              }
              
-             //ÊÕÆğÀ´Ä¬ÈÏ
+             //æ”¶èµ·æ¥é»˜è®¤
              this.fold();
-             //ÉèÖÃ±êÌâ
+             //è®¾ç½®æ ‡é¢˜
              this.updateTitle();
-             //Ìî³äÄÚÈİ
+             //å¡«å……å†…å®¹
              this.showTagDetail();
-             //Òş²Ø
+             //éšè—
              this.setEvent('fold',function(){
                  self.fold();
              })
-             //Õ¹¿ª
+             //å±•å¼€
              .setEvent('expand',function(){
                  self.expand();
              })
-             //É¾³ı
+             //åˆ é™¤
              .setEvent('delete',function(){
                  self.hide();
                  self.deleteTag();
              })
-             //±à¼­
+             //ç¼–è¾‘
              .setEvent('edit',function(){
                  self.setTemplate(undefined,tagEditHtml, Template.defaultOpbar);
                  self.showTagDetail();
@@ -88,7 +88,7 @@
              title && this.dom.find('h2.header span.title').html(title);
          },
          /**
-          *ÊÕËõ 
+          *æ”¶ç¼© 
           */
          fold:function(){
              this.dom.addClass('dialog-tag-fold');
@@ -96,7 +96,7 @@
              return this;
          },
          /**
-          *Õ¹¿ª 
+          *å±•å¼€ 
           */
          expand:function(){
              this.dom.removeClass('dialog-tag-fold');
@@ -120,7 +120,7 @@
              $key.each(function(){
                  var $this=$(this),
                      key=$this.data('key'),
-                     //¸ù¾İÇé¿öÀ´Éè¶¨Õ¹Ê¾ĞÎÊ½
+                     //æ ¹æ®æƒ…å†µæ¥è®¾å®šå±•ç¤ºå½¢å¼
                      fun=$(this).hasClass('input-text')?$this['val']:$this['html'];
                  if(data[key]!==undefined){
                     fun.call($this,data[key]);   
@@ -129,19 +129,19 @@
              return this;
          },
          /**
-          *±£´æ¸Ã±êÇ©µ½·şÎñÆ÷
+          *ä¿å­˜è¯¥æ ‡ç­¾åˆ°æœåŠ¡å™¨
           */
          saveTag:function(){
              
          },
          /**
-          *É¾³ı±êÇ© 
+          *åˆ é™¤æ ‡ç­¾ 
           */
          deleteTag:function(){
             this.destroy();   
          },
          /**
-          *ÖØĞÂÉèÖÃ´óĞ¡ 
+          *é‡æ–°è®¾ç½®å¤§å° 
           */
          resetSize:function(params){
              var self=(params && params.data)||this,
@@ -152,7 +152,7 @@
                  });
          },
          /**
-          *ÖØÔØresizeÍÏ¶¯Æ«ÒÆº¯Êı 
+          *é‡è½½resizeæ‹–åŠ¨åç§»å‡½æ•° 
           */
          resizeOffset:function(scale){
              var title=this.dom.find('h2.header span.title'), 
@@ -171,7 +171,7 @@
             return this;
          },
          /**
-          *ÖØÔØdialogµÄresize±äÎª¶Ô±êÌâµÄÉèÖÃ 
+          *é‡è½½dialogçš„resizeå˜ä¸ºå¯¹æ ‡é¢˜çš„è®¾ç½® 
           */
          setSize:function(size){
            var title=this.dom.find('h2.header span.title');
@@ -179,7 +179,7 @@
            size.height && title.height(size.height);
          },
          /**
-          *ÖØÔØµ÷ÕûÎ»ÖÃ 
+          *é‡è½½è°ƒæ•´ä½ç½® 
           */
          resetPosition:function(params){
             var self=(params && params.data)||this,

@@ -8,7 +8,17 @@
             this.bind();
         },
         /**
-         *ĞÂ½¨¹¤¾ßÀ¸ 
+         *å¸è½½å·¥å…· 
+         */
+        unload:function(){
+            if(!bar){
+                return;
+            }
+            bar.find('a.hidemarks').click();
+            bar.remove();
+        },
+        /**
+         *åˆ›å»ºå·¥å…·æ¡
          */
         createBar:function(){
             var box=Tool.Core.getContainer(),
@@ -20,7 +30,7 @@
             return bar=$(html).prependTo(box);
         },
         /**
-         *»ñÈ¡ÉèÖÃ¶Ô»°¿ò 
+         *æ‰“å¼€å·¥å…·æ¡å¯¹è¯æ¡†
          */
         getSettingDialog:function(){
             var html,
@@ -30,7 +40,7 @@
             }
             dialog=new Tool.Dialog();
             html=Template.pageSettingDialog;
-            dialog.setTemplate('ÉèÖÃÒ³Ãæ²ÎÊı',html);
+            dialog.setTemplate('è®¾ç½®é¡µé¢å‚æ•°',html);
             dialog.setEvent('confirm',function(){
                var dom= dialog.dom,
                    width= dom.find('input.page-width').val();
@@ -44,13 +54,14 @@
             });
             return dialog;
         },
+        
         /**
-         *°ó¶¨ÊÂ¼ş 
+         *ç»‘å®šäº‹ä»¶ 
          */
         bind:function(){
             var self=this;
-            //ÉèÖÃÒ³ÃæÄÚÈİ
-            bar.on('click','a.set-page-paras',function(e){
+            //è®¾ç½®é¡µé¢å†…å®¹
+            bar.on('click.toolbar','a.set-page-paras',function(e){
                 e.preventDefault();
                 var thedialog=self.getSettingDialog(),
                     dom=thedialog.dom;
@@ -58,15 +69,17 @@
                 dom.find('input.character-url').val(Tool.Core.getCharacter());
                 dom.find('input.page-width').val(Tool.Core.getPageWidth());
             })
-            .on('click','a.initmarks',function(e){
+            .on('click.toolbar','a.initmarks',function(e){
                 e.preventDefault();
                 $('div.mark-tag').show();
             })
-            .on('click','a.hidemarks',function(e){
+            .on('click.toolbar','a.hidemarks',function(e){
                 e.preventDefault();
                 $('div.mark-tag').hide();
             });
         }
     };
+   Tool.Toolbar=Toolbar;
+   
    Toolbar.init();
 })(Util,jQuery);

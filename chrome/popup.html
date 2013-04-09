@@ -83,37 +83,6 @@
 			<h3></h3>
 		</div>
 	</div>
-	<script type="text/javascript" src="jquery-1.7.min.js"></script>	
-	<script type="text/javascript" src="tb.js"></script>	
-	<script type="text/javascript">
-	localStorage['username']='ginano'; //账号
-	localStorage['password']='111111'; //密码
-	localStorage['billtype']='3'; //席别
-	localStorage['ID']='3333'; //身份证
-	(function($){
-		var TB={
-			open:function(){
-				chrome.tabs.create({
-						url:'https://dynamic.12306.cn/otsweb/main.jsp',
-						active:true
-					},function(){
-						
-				});
-			},
-			setUserName:function(){
-				 chrome.tabs.executeScript(null,{
-						'file':'login.js';
-				 };
-			}
-		};
-		
-		$('#open').bind('click',function(){
-			TB.open();
-		});
-		$('#set-username').bind('click',function(){
-			TB.setUserName();
-		});
-	})(jQuery);
-	</script>
+	
 </body>
 </html>

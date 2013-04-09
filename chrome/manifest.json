@@ -6,24 +6,26 @@
 	"author":"ginano",
 	"homepage_url": "http://www.ginano.net/index.html",
 	"browser_action":{
-		"default_icon":"icon.png",
-		"default_title":"pageMark",
-		"popup":"popup.html"
+		"default_icon":"images/markfalse.png",
+		"default_title":"pageMark"
 	},
 	"permissions":[
 		"tabs",
-		"*://*.alibaba.com/",
-		"*://*.alibaba-inc.com/"
+		"contextMenus",
+		"storage",
+		"<all_urls>",
+		"notifications"
 	],
 	"options_page":"options.html",
 	 "content_scripts": [
 		 {
 			"matches":[
-				"*://*.alibaba.com/",
-				"*://*.alibaba-inc.com/"
+				"<all_urls>"
 			],
-			"js":["merge.js"]
+			"js":["js/merge.js"]
 		 }
-	]
+	],
+	"background": { "scripts": ["js/app.js"] },
+	"update_url": "http://www.ginano.net/pagemake/checkupdate.xml"
 	
 }

@@ -7,7 +7,7 @@
         Tag=Tool.Tag;
     var Menu={
             /***
-             *´´½¨ÓÒ¼ü²Ëµ¥ 
+             *åˆ›å»ºå³é”®èœå• 
              */
             createRightMenu:function(){
                 var list;
@@ -18,13 +18,13 @@
                 return menu;
             },
             /***
-             *»ñÈ¡µ±Ç°µÄÔªËØ 
+             *è·å–å½“å‰çš„å…ƒç´  
              */
             getCurrentElement:function(){
                 return currentElement;
             },
             /***
-             *»ñÈ¡µ±Ç°µÄÔªËØ 
+             *è·å–å½“å‰çš„å…ƒç´  
              */
             getCurrentPosition:function(){
                 return currentPos;
@@ -33,11 +33,11 @@
                 return currentRealPos;  
             },
             /**
-             *×¢²áÊó±êÓÒ¼üÊÂ¼ş 
+             *æ³¨å†Œé¼ æ ‡å³é”®äº‹ä»¶ 
              */
             registerRightMouse:function(){
                 var menu=this.createRightMenu();
-                $('body').bind('contextmenu',function(e){
+                $('body').bind('contextmenu.pagemark-rightmenu',function(e){
                     e.preventDefault();
                     var from=$(e.target);
                     menu.css({
@@ -60,7 +60,7 @@
                 });
             },
             /**
-             *Í¨¹ıÎÄ±¾²éÕÒ²Ëµ¥Ïî 
+             *é€šè¿‡æ–‡æœ¬æŸ¥æ‰¾èœå•é¡¹ 
              */
             findMenuByText:function(text){
                 var menu=this.createRightMenu(),
@@ -75,13 +75,13 @@
                 return null;
             },
             /**
-             *Ìí¼Ó²Ëµ¥ 
+             *æ·»åŠ èœå• 
              */
             addMenu:function(text,callback){
                 var menu=this.createRightMenu(),
                     list=menu.find('ul.menulist'),
                     theli=this.findMenuByText(text);
-                //Èç¹ûÒÑ¾­ÓĞÁË¾Í²»Ìí¼ÓÁË
+                //å¦‚æœå·²ç»æœ‰äº†å°±ä¸æ·»åŠ äº†
                 if(theli && theli.length>0){
                     return;
                 }
@@ -89,6 +89,16 @@
                 theli.on('click','a.item',callback);
                 list.append(theli);
                 return this;
+            },
+            /**
+             *å¸è½½ 
+             */
+            unload:function(){
+                if(!menu){
+                    return;
+                }
+                $('body').unbind('.pagemark-rightmenu');
+                menu.remove();
             }
         };
    Menu.registerRightMouse();
@@ -111,27 +121,27 @@
           });
         return dialog;
     }
-    Util.Menu.addMenu('ÏÔÊ¾µ±Ç°Ñ¡ÔñÆ÷',function(e){
+    Util.Menu.addMenu('æ˜¾ç¤ºå½“å‰é€‰æ‹©å™¨',function(e){
         e.preventDefault();
         alert(Util.Core.getPathByElement(Util.Menu.getCurrentElement()));
     })
-    .addMenu('ÏÔÊ¾µ±Ç°ÔªËØµÄ×ø±ê',function(e){
+    .addMenu('æ˜¾ç¤ºå½“å‰å…ƒç´ çš„åæ ‡',function(e){
         e.preventDefault();
         var pos=Util.Core.getElementPosition(Util.Menu.getCurrentElement());
         alert('x:'+pos.left+';y:'+pos.top);
     })
-    .addMenu('ÏÔÊ¾µ±Ç°µã»÷µÄ×ø±ê',function(e){
+    .addMenu('æ˜¾ç¤ºå½“å‰ç‚¹å‡»çš„åæ ‡',function(e){
         e.preventDefault();
         var pos=Util.Menu.getCurrentPosition();
         alert('x:'+pos.left+';y:'+pos.top);
     })
-    .addMenu('ÏÔÊ¾µ±Ç°Ò³ÃæµÄÌØÕ÷URL',function(e){
+    .addMenu('æ˜¾ç¤ºå½“å‰é¡µé¢çš„ç‰¹å¾URL',function(e){
         e.preventDefault();
         alert(Util.Url.getCharacter());
     })
-    .addMenu('ĞÂ½¨ÆÕÍ¨±êÇ©',function(e){
+    .addMenu('æ–°å»ºæ™®é€šæ ‡ç­¾',function(e){
         e.preventDefault();
-        getNewDialog().setTemplate('ĞÂ½¨ÆÕÍ¨±êÇ©',Tool.Template.newNormalTag)
+        getNewDialog().setTemplate('æ–°å»ºæ™®é€šæ ‡ç­¾',Tool.Template.newNormalTag)
                       .setEvent('confirm',function(){
                           var dialog=getNewDialog(),
                               tagData=dialog.serializeInput();
@@ -144,9 +154,9 @@
                       .show();
         
     })
-    .addMenu('ĞÂ½¨ÊÂ¼ş±êÇ©',function(e){
+    .addMenu('æ–°å»ºäº‹ä»¶æ ‡ç­¾',function(e){
         e.preventDefault();
-        getNewDialog().setTemplate('ĞÂ½¨ÊÂ¼ş±êÇ©',Tool.Template.newEventTag)
+        getNewDialog().setTemplate('æ–°å»ºäº‹ä»¶æ ‡ç­¾',Tool.Template.newEventTag)
                       .setEvent('confirm',function(){
                           var dialog=getNewDialog(),
                               tagData=dialog.serializeInput();

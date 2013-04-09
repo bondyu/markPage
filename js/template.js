@@ -1,78 +1,78 @@
 (function(Tool){
     Tool.Template={
-        //ÆÕÍ¨¶Ô»°¿òµÄ»ù±¾Ä£°æ
+        //æ™®é€šå¯¹è¯æ¡†çš„åŸºæœ¬æ¨¡ç‰ˆ
         dialog:'<div class="dialog">\
-                <h2 class="header">Ä¬ÈÏ±êÌâ</h2>\
-                <div class="content">Ä¬ÈÏÄÚÈÝ</div>\
+                <h2 class="header">é»˜è®¤æ ‡é¢˜</h2>\
+                <div class="content">é»˜è®¤å†…å®¹</div>\
                 <div class="footer fd-clr">\
                     <div class="fd-right panel">\
-                        <a href="#" class="button" data-button="confirm">È·¶¨</a>\
-                        <a href="#" class="button" data-button="close">È¡Ïû</a>\
+                        <a href="#" class="button" data-button="confirm">ç¡®å®š</a>\
+                        <a href="#" class="button" data-button="close">å–æ¶ˆ</a>\
                     </div>\
                 </div>\
              </div>',
-        //¹¤¾ßÌõµÄÄ£°æ
+        //å·¥å…·æ¡çš„æ¨¡ç‰ˆ
         toolbar:'<div class="toolbar">\
                     <div class="op-panel">\
-                        <a class="button initmarks" href="#">Õ¹Ê¾ËùÓÐ±êÇ©</a>\
-                        <a class="button hidemarks" href="#">Òþ²ØËùÓÐ±êÇ©</a>\
-                        <a class="button set-page-paras" href="#">ÉèÖÃÒ³Ãæ²ÎÊý</a>\
+                        <a class="button initmarks" href="#">å±•ç¤ºæ‰€æœ‰æ ‡ç­¾</a>\
+                        <a class="button hidemarks" href="#">éšè—æ‰€æœ‰æ ‡ç­¾</a>\
+                        <a class="button set-page-paras" href="#">è®¾ç½®é¡µé¢å‚æ•°</a>\
                     </div>\
                  </div>',
-        //Ò³ÃæÉèÖÃ¶Ô»°¿òÄ£°æ
+        //é¡µé¢è®¾ç½®å¯¹è¯æ¡†æ¨¡ç‰ˆ
         pageSettingDialog:'<div class="setting-list">\
-                    <dl class="fd-clr"><dt>Ò³ÃæÌØÕ÷Url:</dt><dd><input type="text" readonly="readonly" class="input-text character-url"/></dd></dl>\
-                    <dl class="fd-clr"><dt>Ò³Ãæ¿í¶È:</dt><dd><input type="text" class="input-text page-width"/>&nbsp;px</dd></dl>\
+                    <dl class="fd-clr"><dt>é¡µé¢ç‰¹å¾Url:</dt><dd><input type="text" readonly="readonly" class="input-text character-url"/></dd></dl>\
+                    <dl class="fd-clr"><dt>é¡µé¢å®½åº¦:</dt><dd><input type="text" class="input-text page-width"/>&nbsp;px</dd></dl>\
                   </div>',
-        //Ìí¼ÓÆÕÍ¨±êÇ©¶Ô»°¿òÄ£°æ
+        //æ·»åŠ æ™®é€šæ ‡ç­¾å¯¹è¯æ¡†æ¨¡ç‰ˆ
         newNormalTag:'<div class="setting-list normal-tag-setting">\
                     <input type="hidden" data-key="isEvent" class="tag-key" value="false"/>\
-                    <dl class="fd-clr"><dt>±êÇ©Ãû³Æ:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>ÔªËØÑ¡ÔñÆ÷:</dt><dd><input type="text"   data-key="selector" class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>Êý¾ÝÔ´:</dt><dd><input type="text"  data-key="dataSource"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>¹æÔò:</dt><dd><input type="text"  data-key="rule"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>æ ‡ç­¾åç§°:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>å…ƒç´ é€‰æ‹©å™¨:</dt><dd><input type="text"   data-key="selector" class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>æ•°æ®æº:</dt><dd><input type="text"  data-key="dataSource"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>è§„åˆ™:</dt><dd><input type="text"  data-key="rule"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>service:</dt><dd><input type="text"  data-key="service"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>²âÊÔÓÃÀý:</dt><dd><input type="text"  data-key="testCase"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>À×Çø:</dt><dd><input type="text"  data-key="bugs"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>¿ª·¢&²âÊÔ¸ºÔðÈË:</dt><dd><input type="text"  data-key="coder"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>æµ‹è¯•ç”¨ä¾‹:</dt><dd><input type="text"  data-key="testCase"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>é›·åŒº:</dt><dd><input type="text"  data-key="bugs"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>å¼€å‘&æµ‹è¯•è´Ÿè´£äºº:</dt><dd><input type="text"  data-key="coder"  class="input-text tag-key"/></dd></dl>\
                   </div>',
-        //Ìí¼ÓÆÕÍ¨±êÇ©¶Ô»°¿òÄ£°æ
+        //æ·»åŠ æ™®é€šæ ‡ç­¾å¯¹è¯æ¡†æ¨¡ç‰ˆ
         newEventTag:'<div class="setting-list event-tag-setting">\
                     <input type="hidden" data-key="isEvent" class="tag-key" value="true"/>\
-                    <dl class="fd-clr"><dt>±êÇ©Ãû³Æ:</dt><dd><input type="text"  data-key="title"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>ÌØÕ÷²ÎÊý±êÊ¶:</dt><dd><input type="text"   data-key="charater" class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>µ±Ç°ÔªËØÑ¡ÔñÆ÷:</dt><dd><input type="text"  data-key="selector"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>ÊÂ¼þÀàÐÍ:</dt><dd><input type="text"   data-key="eventType" class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>æ ‡ç­¾åç§°:</dt><dd><input type="text"  data-key="title"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>ç‰¹å¾å‚æ•°æ ‡è¯†:</dt><dd><input type="text"   data-key="charater" class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>å½“å‰å…ƒç´ é€‰æ‹©å™¨:</dt><dd><input type="text"  data-key="selector"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>äº‹ä»¶ç±»åž‹:</dt><dd><input type="text"   data-key="eventType" class="input-text tag-key"/></dd></dl>\
                   </div>',
-        //ÊÂ¼þ±êÇ©
+        //äº‹ä»¶æ ‡ç­¾
         eventTag:'<div class="setting-list event-tag-detail">\
-                    <dl class="fd-clr"><dt>±êÇ©Ãû³Æ:</dt><dd><span class="tag-key"  data-key="title"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>ÌØÕ÷²ÎÊý±êÊ¶:</dt><dd><span class="tag-key"  data-key="charater"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>µ±Ç°ÔªËØÑ¡ÔñÆ÷:</dt><dd><span class="tag-key"  data-key="selector"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>ÊÂ¼þÀàÐÍ:</dt><dd><span class="tag-key"  data-key="eventType"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>æ ‡ç­¾åç§°:</dt><dd><span class="tag-key"  data-key="title"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>ç‰¹å¾å‚æ•°æ ‡è¯†:</dt><dd><span class="tag-key"  data-key="charater"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>å½“å‰å…ƒç´ é€‰æ‹©å™¨:</dt><dd><span class="tag-key"  data-key="selector"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>äº‹ä»¶ç±»åž‹:</dt><dd><span class="tag-key"  data-key="eventType"></span></dd></dl>\
                   </div>',
-        //ÆÕÍ¨±êÇ©
+        //æ™®é€šæ ‡ç­¾
         normalTag:'<div class="setting-list normal-tag-setting">\
-                    <dl class="fd-clr"><dt>±êÇ©Ãû³Æ:</dt><dd><span class="tag-key" data-key="title"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>ÔªËØÑ¡ÔñÆ÷:</dt><dd><span class="tag-key"  data-key="selector"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>Êý¾ÝÔ´:</dt><dd><span class="tag-key"  data-key="dataSource"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>¹æÔò:</dt><dd><span class="tag-key"  data-key="rule"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>æ ‡ç­¾åç§°:</dt><dd><span class="tag-key" data-key="title"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>å…ƒç´ é€‰æ‹©å™¨:</dt><dd><span class="tag-key"  data-key="selector"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>æ•°æ®æº:</dt><dd><span class="tag-key"  data-key="dataSource"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>è§„åˆ™:</dt><dd><span class="tag-key"  data-key="rule"></span></dd></dl>\
                     <dl class="fd-clr"><dt>service:</dt><dd><span class="tag-key"  data-key="service"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>²âÊÔÓÃÀý:</dt><dd><span class="tag-key"  data-key="testCase"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>À×Çø:</dt><dd><span class="tag-key"  data-key="bugs"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>¿ª·¢&²âÊÔ¸ºÔðÈË:</dt><dd><span class="tag-key"  data-key="coder"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>æµ‹è¯•ç”¨ä¾‹:</dt><dd><span class="tag-key"  data-key="testCase"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>é›·åŒº:</dt><dd><span class="tag-key"  data-key="bugs"></span></dd></dl>\
+                    <dl class="fd-clr"><dt>å¼€å‘&æµ‹è¯•è´Ÿè´£äºº:</dt><dd><span class="tag-key"  data-key="coder"></span></dd></dl>\
                   </div>',
-        //Ä¬ÈÏ±êÌâ
-        defaultTitle:'<span class="title tag-key" data-key="title">±êÇ©</span>\
-                      <a href="#" class="button" data-button="expand">Õ¹¿ª</a>\
-                      <a href="#" class="button" data-button="delete">É¾³ý</a>\
+        //é»˜è®¤æ ‡é¢˜
+        defaultTitle:'<span class="title tag-key" data-key="title">æ ‡ç­¾</span>\
+                      <a href="#" class="button" data-button="expand">å±•å¼€</a>\
+                      <a href="#" class="button" data-button="delete">åˆ é™¤</a>\
                       <span href="#" class="resize-bar">&#47;&#47;</span>',
-        //Ä¬ÈÏ²Ù×÷À¸
-        defaultOpbar:'<a href="#" class="button" data-button="confirm">È·¶¨</a>\
-                      <a href="#" class="button" data-button="cancel">È¡Ïû</a>',
-        //±êÇ©²Ù×÷À¸
-        tagOpbar:'<a href="#" class="button" data-button="edit">±à¼­</a>\
-                  <a href="#" class="button" data-button="delete">É¾³ý</a>\
-                  <a href="#" class="button" data-button="fold">ÊÕÆð</a>'
+        //é»˜è®¤æ“ä½œæ 
+        defaultOpbar:'<a href="#" class="button" data-button="confirm">ç¡®å®š</a>\
+                      <a href="#" class="button" data-button="cancel">å–æ¶ˆ</a>',
+        //æ ‡ç­¾æ“ä½œæ 
+        tagOpbar:'<a href="#" class="button" data-button="edit">ç¼–è¾‘</a>\
+                  <a href="#" class="button" data-button="delete">åˆ é™¤</a>\
+                  <a href="#" class="button" data-button="fold">æ”¶èµ·</a>'
     };
 })(Util);

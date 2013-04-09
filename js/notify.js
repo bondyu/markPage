@@ -1,9 +1,9 @@
 /***************
- * ÏûÏ¢ÊÂ¼şÍ¨Öª
+ * æ¶ˆæ¯äº‹ä»¶é€šçŸ¥
  ***************/
 (function(tool){
     /***
-     *ÏûÏ¢Àà 
+     *æ¶ˆæ¯ç±» 
      *@class Notify 
      */
     var Notify=function(){
@@ -11,13 +11,13 @@
     };
     Notify.prototype={
         /**
-         *´´½¨Ò»¸öĞÂµÄÏûÏ¢ÊµÌå 
+         *åˆ›å»ºä¸€ä¸ªæ–°çš„æ¶ˆæ¯å®ä½“ 
          */
         create:function(){
             return new Notify();
         },
         /**
-         *°ó¶¨ÊÂ¼ş 
+         *ç»‘å®šäº‹ä»¶ 
          * @param {Object} eventname
          * @param {Object} callback
          */
@@ -32,7 +32,7 @@
             return this;
         },
         /**
-         *½â³ıÊÂ¼ş 
+         *è§£é™¤äº‹ä»¶ 
          * @param {Object} eventname
          * @param {Object} callback
          */
@@ -51,7 +51,7 @@
             return this;
         },
         /**
-         *´¥·¢ÏûÏ¢ 
+         *è§¦å‘æ¶ˆæ¯ 
          * @param {Object} eventname
          */
         notify:function(eventname){

@@ -31,5 +31,6 @@
                 $('div.dialog-tag').show();
             }
         };
+  Tool.APP=app;
   app.init();  
 })(Util,jQuery);

@@ -1,15 +1,15 @@
 /**
- *±ê¼ÇÒ³ÃæÒıÓÃÎÄ¼ş £¬Ä¿Ç°Ö»Õë¶Ôchromeä¯ÀÀÆ÷£¬²»¼æÈİIE
+ *æ ‡è®°é¡µé¢å¼•ç”¨æ–‡ä»¶ ï¼Œç›®å‰åªé’ˆå¯¹chromeæµè§ˆå™¨ï¼Œä¸å…¼å®¹IE
  * @author ginano
  * @date 20130217
  */
 /************************************
- *¹¤¾ßÀàÃüÃû¿Õ¼ä 
+ *å·¥å…·ç±»å‘½åç©ºé—´ 
  ************************************/
 var Util={};
 
 /***********************************
- * ÆÕÍ¨Í¨ÓÃ¹¤¾ß
+ * æ™®é€šé€šç”¨å·¥å…·
  **********************************/
 
 Util.Common={
@@ -18,17 +18,18 @@ Util.Common={
   } 
 };
 /************************************
- *Òì²½¼ÓÔØ×ÊÔ´ÎÄ¼ş¹¤¾ß 
+ *å¼‚æ­¥åŠ è½½èµ„æºæ–‡ä»¶å·¥å…· 
  ************************************/
 Util.Loader={
   /**
-   *¼ÓÔØjsÎÄ¼ş 
+   *åŠ è½½jsæ–‡ä»¶ 
    * @param {Object} url
    */
   importJS:function(url,callback,onerror){
         var head = document.getElementsByTagName("head")[0],
             script = document.createElement("script");
         script.type = "text/javascript";
+        script.charset='utf-8';
         callback && script.addEventListener("load", callback, false);
         script.addEventListener("error", function(){
             if(onerror){
@@ -41,7 +42,7 @@ Util.Loader={
         head.appendChild(script);
   },
   /**
-   *¼ÓÔØcssÎÄ¼ş 
+   *åŠ è½½cssæ–‡ä»¶ 
    * @param {Object} url
    */
   importCSS:function(url,callback,onerror){
@@ -49,6 +50,7 @@ Util.Loader={
             link = document.createElement("link");
         link.rel="stylesheet";
         link.type = "text/css";
+        link.charset='utf-8';
         callback && link.addEventListener("load", callback, false);
         link.addEventListener("error", function(){
             if(onerror){
@@ -61,10 +63,10 @@ Util.Loader={
         head.appendChild(link);
   },
   /**
-   *Òì²½¼ÓÔØËùĞèµÄÎÄ¼ş 
+   *å¼‚æ­¥åŠ è½½æ‰€éœ€çš„æ–‡ä»¶ 
    * @param {Array} urls
    * @param {Function} callback
-   * @param {Boolean} [option=true] isOrdered ÊÇ·ñĞèÒª°´Ğò¼ÓÔØ£¬Ä¬ÈÏÊÇĞèÒª°´Ğò¼ÓÔØ
+   * @param {Boolean} [option=true] isOrdered æ˜¯å¦éœ€è¦æŒ‰åºåŠ è½½ï¼Œé»˜è®¤æ˜¯éœ€è¦æŒ‰åºåŠ è½½
    */
   asyncLoad:function(urls,callback,isOrdered){
       var _self=this,
@@ -74,7 +76,7 @@ Util.Loader={
           i,
           len=(urls instanceof Array) && urls.length,
           /**
-           *¸ù¾İºó×ºÅĞ¶ÏÊÇjs»¹ÊÇcssÎÄ¼ş 
+           *æ ¹æ®åç¼€åˆ¤æ–­æ˜¯jsè¿˜æ˜¯cssæ–‡ä»¶ 
            * @param {Object} url
            * @param {Object} done
            */
@@ -96,11 +98,11 @@ Util.Loader={
       if(!len || len<1){
           return;
       }
-      //Èç¹ûÓĞË³Ğò
+      //å¦‚æœæœ‰é¡ºåº
       if(isOrder){
           orderLoad();
       }else{
-         //Èç¹ûÃ»ÓĞË³Ğò¼ÓÔØ   
+         //å¦‚æœæ²¡æœ‰é¡ºåºåŠ è½½   
          for(i=0,now=0;i<len;i++){
              load(urls[i],function(){
                  now+=1;
@@ -113,12 +115,12 @@ Util.Loader={
   } 
 };
 /***********************************************
- * Â·¾¶ÅĞ¶Ï
+ * è·¯å¾„åˆ¤æ–­
  ***********************************************/
 Util.Url={
     
     /**
-     *»ñÈ¡µ±Ç°µÄÖ¸Áî×´Ì¬ 
+     *è·å–å½“å‰çš„æŒ‡ä»¤çŠ¶æ€ 
      */
     getCommands:function(){
         var cmd=window.location.hash,
@@ -133,22 +135,22 @@ Util.Url={
 
 Util.Common.log(Util.Url.getCommands());
 /**
- *Èë¿Úº¯Êı 
+ *å…¥å£å‡½æ•° 
  */
 var done=function(){
     Util.Loader.asyncLoad([
-        'http://ali-54473/markpage/css/common.css',   //»ù±¾ÑùÊ½
-        'http://ali-54473/markpage/css/dialog.css',   //¶Ô»°¿ò»ù±¾ÑùÊ½
-        'http://ali-54473/markpage/css/toolbar.css',  //Ò³Ãæ¹¤¾ßÌõÑùÊ½
-        'http://ali-54473/markpage/css/tag.css',      //»ù±¾±êÇ©ÑùÊ½
-        'http://ali-54473/markpage/css/newtag.css',   //ĞÂ½¨±êÇ©ÑùÊ½
-        'http://ali-54473/markpage/css/mouseright.css',   //Êó±êÓÒ¼üÑùÊ½
-        'http://ali-54473/markpage/js/data.js',         //´æ´¢Êı¾İÓÃ
+        'http://ali-54473/markpage/css/common.css',   //åŸºæœ¬æ ·å¼
+        'http://ali-54473/markpage/css/dialog.css',   //å¯¹è¯æ¡†åŸºæœ¬æ ·å¼
+        'http://ali-54473/markpage/css/toolbar.css',  //é¡µé¢å·¥å…·æ¡æ ·å¼
+        'http://ali-54473/markpage/css/tag.css',      //åŸºæœ¬æ ‡ç­¾æ ·å¼
+        'http://ali-54473/markpage/css/newtag.css',   //æ–°å»ºæ ‡ç­¾æ ·å¼
+        'http://ali-54473/markpage/css/mouseright.css',   //é¼ æ ‡å³é”®æ ·å¼
+        'http://ali-54473/markpage/js/data.js',         //å­˜å‚¨æ•°æ®ç”¨
         'http://ali-54473/markpage/js/notify.js',
-        'http://ali-54473/markpage/js/template.js',     //ËùÓĞµÄÒ³ÃæÄ£°æ
+        'http://ali-54473/markpage/js/template.js',     //æ‰€æœ‰çš„é¡µé¢æ¨¡ç‰ˆ
         'http://ali-54473/markpage/js/core.js',
         'http://ali-54473/markpage/js/dialog.js',
-        'http://ali-54473/markpage/js/tag.js',       //±êÇ©¹¹ÔìÀà
+        'http://ali-54473/markpage/js/tag.js',       //æ ‡ç­¾æ„é€ ç±»
         'http://ali-54473/markpage/js/rightmenu.js',
         'http://ali-54473/markpage/js/toolbar.js',
         'http://ali-54473/markpage/js/mvc.js',
@@ -156,13 +158,15 @@ var done=function(){
         'http://ali-54473/markpage/js/tag/view.js',
         'http://ali-54473/markpage/js/tag/controller.js',
         'http://ali-54473/markpage/js/tag/model.js',
-        'http://ali-54473/markpage/js/init.js'
+        'http://ali-54473/markpage/js/pageTag.js',      //é¡µé¢æ ‡ç­¾
+        'http://ali-54473/markpage/js/load.js',         //é‡æ–°åŠ è½½åˆå§‹åŒ–
+        'http://ali-54473/markpage/js/unload.js'        //å¸è½½æ’ä»¶å†…å®¹
     ],function(){
         
     },true);
 };
 /**
- *Èç¹ûÊÇÒÑ¾­¼ÓÔØÁËjquery¿ò¼ÜµÄ 
+ *å¦‚æœæ˜¯å·²ç»åŠ è½½äº†jqueryæ¡†æ¶çš„ 
  */
 if(window.FE){
     done();
