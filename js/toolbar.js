@@ -1,7 +1,8 @@
 (function(Tool,$){
     var bar,
         dialog,
-        Template=Tool.Template;
+        Template=Tool.Template,
+        PageTag=Tool.PageTag;
     var Toolbar={
         init:function(){
             this.createBar();
@@ -14,8 +15,8 @@
             if(!bar){
                 return;
             }
-            bar.find('a.hidemarks').click();
             bar.remove();
+            bar=null;
         },
         /**
          *创建工具条
@@ -71,15 +72,13 @@
             })
             .on('click.toolbar','a.initmarks',function(e){
                 e.preventDefault();
-                $('div.mark-tag').show();
+                PageTag.showAllTags();
             })
             .on('click.toolbar','a.hidemarks',function(e){
                 e.preventDefault();
-                $('div.mark-tag').hide();
+                PageTag.hideAllTags();
             });
         }
     };
    Tool.Toolbar=Toolbar;
-   
-   Toolbar.init();
 })(Util,jQuery);

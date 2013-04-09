@@ -25,12 +25,14 @@
                 });   
             },
             hideAllTags:function(){
-                $('div.dialog-tag').hide();
+                $('div.mark-tag').hide();
             },
             showAllTags:function(){
-                $('div.dialog-tag').show();
+                $('div.mark-tag').show();
+            },
+            unload:function(){
+                $('div.mark-tag').remove();
             }
         };
-  Tool.APP=app;
-  app.init();  
+  Tool.PageTag=app;
 })(Util,jQuery);

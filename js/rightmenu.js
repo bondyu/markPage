@@ -2,10 +2,29 @@
     var menu,
         currentElement,
         currentPos,
-        currentRealPos;
+        currentRealPos,
+        dialog;
+        
     var Core=Tool.Core,
-        Tag=Tool.Tag;
+        Tag=Tool.Tag,
+        Dialog=Tool.Dialog;
+        
+    function getNewDialog(){
+        if(dialog){
+            return dialog;
+        }
+        dialog=new Dialog(true);
+        dialog.setEvent('close',function(){
+                  dialog.hide();
+          });
+        return dialog;
+    }
+    
     var Menu={
+            init:function(){
+                this.registerRightMouse();
+                this.initialMenus();
+            },
             /***
              *创建右键菜单 
              */
@@ -90,6 +109,57 @@
                 list.append(theli);
                 return this;
             },
+            initialMenus:function(){
+                var self=this;
+                self.addMenu('显示当前选择器',function(e){
+                    e.preventDefault();
+                    alert(Core.getPathByElement(self.getCurrentElement()));
+                })
+                .addMenu('显示当前元素的坐标',function(e){
+                    e.preventDefault();
+                    var pos=Core.getElementPosition(self.getCurrentElement());
+                    alert('x:'+pos.left+';y:'+pos.top);
+                })
+                .addMenu('显示当前点击的坐标',function(e){
+                    e.preventDefault();
+                    var pos=self.getCurrentPosition();
+                    alert('x:'+pos.left+';y:'+pos.top);
+                })
+                .addMenu('显示当前页面的特征URL',function(e){
+                    e.preventDefault();
+                    alert(Util.Url.getCharacter());
+                })
+                .addMenu('新建普通标签',function(e){
+                    e.preventDefault();
+                    getNewDialog().setTemplate('新建普通标签',Tool.Template.newNormalTag)
+                                  .setEvent('confirm',function(){
+                                      var dialog=getNewDialog(),
+                                          tagData=dialog.serializeInput();
+                                      var tag=new Tag(tagData);
+                                      tag.show()
+                                         .setPosition(self.getCurrentRealPosition());
+                                      getNewDialog().hide();
+                                  })
+                                  .setPosition(self.getCurrentRealPosition())
+                                  .show();
+                    
+                })
+                .addMenu('新建事件标签',function(e){
+                    e.preventDefault();
+                    getNewDialog().setTemplate('新建事件标签',Tool.Template.newEventTag)
+                                  .setEvent('confirm',function(){
+                                      var dialog=getNewDialog(),
+                                          tagData=dialog.serializeInput();
+                                      var tag=new Tag(tagData);
+                                      tag.show()
+                                         .setPosition(self.getCurrentRealPosition());
+                                      getNewDialog().hide();
+                                  })
+                                  .setPosition(self.getCurrentRealPosition())
+                                  .show();
+                    
+                });  
+            },
             /**
              *卸载 
              */
@@ -99,75 +169,10 @@
                 }
                 $('body').unbind('.pagemark-rightmenu');
                 menu.remove();
+                menu=null;
             }
         };
-   Menu.registerRightMouse();
-   
    Util.Menu=Menu;
 })(Util,jQuery);
 
 
-(function(Tool,$){
-    var Dialog=Tool.Dialog,
-        Tag=Tool.Tag,
-        dialog;
-    function getNewDialog(){
-        if(dialog){
-            return dialog;
-        }
-        dialog=new Dialog(true);
-        dialog.setEvent('close',function(){
-                  dialog.hide();
-          });
-        return dialog;
-    }
-    Util.Menu.addMenu('显示当前选择器',function(e){
-        e.preventDefault();
-        alert(Util.Core.getPathByElement(Util.Menu.getCurrentElement()));
-    })
-    .addMenu('显示当前元素的坐标',function(e){
-        e.preventDefault();
-        var pos=Util.Core.getElementPosition(Util.Menu.getCurrentElement());
-        alert('x:'+pos.left+';y:'+pos.top);
-    })
-    .addMenu('显示当前点击的坐标',function(e){
-        e.preventDefault();
-        var pos=Util.Menu.getCurrentPosition();
-        alert('x:'+pos.left+';y:'+pos.top);
-    })
-    .addMenu('显示当前页面的特征URL',function(e){
-        e.preventDefault();
-        alert(Util.Url.getCharacter());
-    })
-    .addMenu('新建普通标签',function(e){
-        e.preventDefault();
-        getNewDialog().setTemplate('新建普通标签',Tool.Template.newNormalTag)
-                      .setEvent('confirm',function(){
-                          var dialog=getNewDialog(),
-                              tagData=dialog.serializeInput();
-                          var tag=new Tag(tagData);
-                          tag.show()
-                             .setPosition(Tool.Menu.getCurrentRealPosition());
-                          getNewDialog().hide();
-                      })
-                      .setPosition(Tool.Menu.getCurrentRealPosition())
-                      .show();
-        
-    })
-    .addMenu('新建事件标签',function(e){
-        e.preventDefault();
-        getNewDialog().setTemplate('新建事件标签',Tool.Template.newEventTag)
-                      .setEvent('confirm',function(){
-                          var dialog=getNewDialog(),
-                              tagData=dialog.serializeInput();
-                          var tag=new Tag(tagData);
-                          tag.show()
-                             .setPosition(Tool.Menu.getCurrentRealPosition());
-                          getNewDialog().hide();
-                      })
-                      .setPosition(Tool.Menu.getCurrentRealPosition())
-                      .show();
-        
-    });
-    
-})(Util,jQuery);

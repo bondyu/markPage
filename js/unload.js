@@ -5,7 +5,7 @@ window.addEventListener("message", function(event) {
         Tool.Toolbar.unload();
         Tool.Menu.unload();
         //删除所有的标签
-        $('div.mark-tag').remove();
+        Tool.PageTag.unload();
     }
 }, false);  
     

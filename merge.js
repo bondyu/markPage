@@ -152,17 +152,18 @@ var done=function(){
         'http://ali-54473/markpage/js/dialog.js',
         'http://ali-54473/markpage/js/tag.js',       //标签构造类
         'http://ali-54473/markpage/js/rightmenu.js',
+        'http://ali-54473/markpage/js/pagetag.js',      //页面标签
         'http://ali-54473/markpage/js/toolbar.js',
         'http://ali-54473/markpage/js/mvc.js',
         'http://ali-54473/markpage/js/class.js',
         'http://ali-54473/markpage/js/tag/view.js',
         'http://ali-54473/markpage/js/tag/controller.js',
         'http://ali-54473/markpage/js/tag/model.js',
-        'http://ali-54473/markpage/js/pageTag.js',      //页面标签
         'http://ali-54473/markpage/js/load.js',         //重新加载初始化
         'http://ali-54473/markpage/js/unload.js'        //卸载插件内容
     ],function(){
-        
+        //下载完了就执行一下
+        window.postMessage('loadpagemark','*');
     },true);
 };
 /**
