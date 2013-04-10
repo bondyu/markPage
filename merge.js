@@ -7,7 +7,12 @@
  *工具类命名空间 
  ************************************/
 var Util={};
-
+/***********************************
+ * 页面配置
+ **********************************/
+Util.Configs={
+  serverUrl:'http://alibaba-62762.hz.ali.com:8083'
+};
 /***********************************
  * 普通通用工具
  **********************************/
@@ -122,17 +127,37 @@ Util.Url={
     /**
      *获取当前的指令状态 
      */
-    getCommands:function(){
-        var cmd=window.location.hash,
+    getCommands:function(type){
+        var cmd=location[type||'hash'],
             len=cmd.length-1;
         if(len>1){
-            return cmd.substr(1,cmd.length-1);
+            return decodeURIComponent(cmd.substr(1,cmd.length-1));
         }else{
-            return null;
+            return '';
         }
+    },
+    parseObject:function(type){
+        var source=this.getCommands(type||'search'),
+            result={};
+        function parseObject(str){
+            var o;
+            try{
+                o=JSON.parse(str);            
+            }catch(e){
+                o=str;
+            }
+            return o;
+        }
+        if(source){
+            source.replace(/([^&=]+)=([^&=]*)/g,function(mt,p1,p2,p3){
+                result[p1]=parseObject(p2);
+            });
+        }
+        return result;
     }
 };
 
+Util.Url.parseObject();
 Util.Common.log(Util.Url.getCommands());
 /**
  *入口函数 
@@ -148,11 +173,11 @@ var done=function(){
         'http://ali-54473/markpage/js/data.js',         //存储数据用
         'http://ali-54473/markpage/js/notify.js',
         'http://ali-54473/markpage/js/template.js',     //所有的页面模版
-        'http://ali-54473/markpage/js/core.js',
         'http://ali-54473/markpage/js/dialog.js',
         'http://ali-54473/markpage/js/tag.js',       //标签构造类
-        'http://ali-54473/markpage/js/rightmenu.js',
+        'http://ali-54473/markpage/js/core.js',
         'http://ali-54473/markpage/js/pagetag.js',      //页面标签
+        'http://ali-54473/markpage/js/rightmenu.js',
         'http://ali-54473/markpage/js/toolbar.js',
         'http://ali-54473/markpage/js/mvc.js',
         'http://ali-54473/markpage/js/class.js',
@@ -162,7 +187,7 @@ var done=function(){
         'http://ali-54473/markpage/js/load.js',         //重新加载初始化
         'http://ali-54473/markpage/js/unload.js'        //卸载插件内容
     ],function(){
-        //下载完了就执行一下
+        //下载完了就执行一下,开始加载页面的所有标签
         window.postMessage('loadpagemark','*');
     },true);
 };

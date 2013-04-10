@@ -2,7 +2,8 @@
     var bar,
         dialog,
         Template=Tool.Template,
-        PageTag=Tool.PageTag;
+        PageTag=Tool.PageTag,
+        Notify=Tool.Notify;
     var Toolbar={
         init:function(){
             this.createBar();

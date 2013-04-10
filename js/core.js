@@ -1,11 +1,12 @@
 (function(Tool,$){
     var DATA=Tool.Data.page,
-        Notify=Tool.Notify;
+        Notify=Tool.Notify,
+        Configs=Tool.Configs,
+        URL=Tool.Url;
     
     var Core={
             init:function(){
                 this.createContainer();
-                this.setPageWidth(this.valuatePageWidth());
                 this.setPageCharacter(this.getCharacter());
             },
             /**
@@ -49,12 +50,74 @@
               return DATA.charaterUrl;  
             },
             /**
+             *初始化页面信息 
+             */
+            initPageParams:function(){
+                var self=this,
+                    router=URL.getCommands('hash'),
+                    isFromUrl=/pagemark=/i.test(router); //是否是从后来过来的，携带查询条件的
+                if(isFromUrl){
+                   isFromUrl=URL.parseObject('hash')['pagemark'];
+                }else{
+                   isFromUrl={};
+                }
+                isFromUrl['comUrl']='1688.com';
+                DATA.width=self.valuatePageWidth();
+                
+                $.ajax({
+                    url:Configs.serverUrl+'/webapp/AjaxQueryPageList.do',
+                    dataType:'jsonp',
+                    data:{
+                        query:JSON.stringify({
+                                comUrl:self.getPageCharacter()
+                              })
+                    },
+                    success:function(o){
+                        var re;
+                        if(o.success&&o.result&&o.result.length>0){
+                            re=o.result[0];
+                            DATA.width=re['pagewidth'];
+                            //如果页面存在特征值，有多个标签的情况下
+                            if(re['featrue']){
+                                //要先选择哪个特征值
+                                Notify.notify('choosePageCharact',function(feature){
+                                    isFromUrl['feature']=feature;
+                                    Notify.notify('loadTags',isFromUrl);
+                                });
+                            }else{
+                                Notify.notify('loadTags',isFromUrl);
+                            }
+                        }
+                    }
+                });
+            },
+            /**
              *设置页面宽度 
              */
             setPageWidth:function(width){
                 DATA.width=width;
+                var self=this,
+                    data={
+                        pageWidth:width,
+                        comUrl:this.getPageCharacter(),
+                        totalUrl:location.href, //全部url
+                        feature:'a,b,c',//多tab的特征值
+                        appearCondition:'fslfs',//出现条件
+                        name:document.title//页面名称
+                    };
                 //发送消息
-                Notify.notify('pageWidthChange',width);
+                $.ajax({
+                    url:'http://alibaba-62762.hz.ali.com:8083/webapp/AjaxCreatePage.do',
+                    dataType:'jsonp',
+                    data:{
+                        query:JSON.stringify(data)
+                    },
+                    success:function(o){
+                        
+                    }
+                });
+                //发送消息重新渲染tag的排列
+                Notify.notify('reflowTags');
             },
             /**
              *设置页面的特征URL 

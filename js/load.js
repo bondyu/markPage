@@ -2,9 +2,9 @@
   
 window.addEventListener("message", function(event) {
     if(event.data=='loadpagemark'){
+        Tool.Core.initPageParams();
         Tool.Toolbar.init();
         Tool.Menu.init();
-        Tool.PageTag.init();
     }
 }, false);  
     

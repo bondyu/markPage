@@ -62,7 +62,7 @@
                 return;
             }
             for(i=0,len=elist.length;i<len;i++){
-                elist[i].call(null,args);
+                elist[i].apply(null,args);
             }
             return this;
         }
