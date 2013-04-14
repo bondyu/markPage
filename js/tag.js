@@ -1,8 +1,9 @@
 (function(Tool,$){
     var Dialog=Tool.Dialog,
         Core=Tool.Core,
-        Data=Tool.Data,
-        Template=Tool.Template;
+        Data=Core.getPageData(),
+        Template=Tool.Template,
+        Configs=Tool.Configs;
      function Tag(param){
          Dialog.call(this,true,true);
          this.dom.addClass('mark-tag');
@@ -25,7 +26,7 @@
               *增加事件标签样式 
               */
              if(data.isEvent){
-                 dom.addClass('dialog-tag-event');
+                 dom.addClass('pmdialog-tag-event');
              }
              //设定位置
              if(data.pos){
@@ -45,6 +46,7 @@
              this.updateTitle();
              //填充内容
              this.showTagDetail();
+             
              //隐藏
              this.setEvent('fold',function(){
                  self.fold();
@@ -66,12 +68,18 @@
              self.setEvent('confirm',function(){
                  var _DATA=self.serializeInput();
                  self.setData(_DATA);
+                 self.saveTag();
                  self.setTemplate(undefined,tagDetailHtml, Template.tagOpbar);
                  self.showTagDetail();
              })
              .setEvent('cancel',function(){
                  self.setTemplate(undefined,tagDetailHtml, Template.tagOpbar);
                  self.showTagDetail();
+             })
+             .setEvent('dragend',function(){
+                 var pos=Tool.Core.getElementPosition(dom);
+                 self.setData({pos:pos});
+                 self.saveTag();
              })
              .setEvent('resizeend',function(){
                  var size={
@@ -81,17 +89,49 @@
                  self.setData({
                      size:size
                  });
+                 self.saveTag();
              });
          },
          updateTitle:function(){
              var title=this.getData().title;
              title && this.dom.find('h2.header span.title').html(title);
          },
+          //判断是否需要加上tab特征值选择
+        checkTabFeature:function(){
+            var _data=this.getData(),
+                isEdit,
+                _html,flist,i,len,isSelected;
+              
+          //页面是否有特征值
+          if(Data.feature){
+              flist=Data.feature.split(',');
+              _html=[];
+              isEdit=this.dom.find('div.tag-detail').length<1,
+              _html.push('<dl class="fd-clr"><dt>所属Tab特征参数:</dt><dd>');
+              if(isEdit){
+                  _html.push('<select data-key="character"  class="input-text tag-key">');
+                  for(i=0,len=flist.length;i<len;i++){
+                      if(_data.character==flist[i]){
+                          isSelected='selected="selected"';
+                      }else{
+                          isSelected='';
+                      }
+                      _html.push('<option value="'+flist[i]+'" '+isSelected+'>'+flist[i]+'</option>');
+                  }
+                  _html.push('</select>');
+              }else{
+                _html.push('<span class="tag-key"  data-key="character">'+_data.character+'</span>');
+              }
+              _html.push('</dd></dl>');
+              this.dom.find('div.setting-list').prepend(_html.join(''));
+          }
+          return this;  
+        },
          /**
           *收缩 
           */
          fold:function(){
-             this.dom.addClass('dialog-tag-fold');
+             this.dom.addClass('pmdialog-tag-fold');
              this.resetSize();
              return this;
          },
@@ -99,7 +139,7 @@
           *展开 
           */
          expand:function(){
-             this.dom.removeClass('dialog-tag-fold');
+             this.dom.removeClass('pmdialog-tag-fold');
              this.setSize({
                  height:'auto'
              });
@@ -109,30 +149,58 @@
              return this.data;
          },
          setData:function(data){
-           $.extend(this.data,{
-               isEvent:false
-           },data);
+           $.extend(this.data,data);
            return this;  
          },
          showTagDetail:function(){
-             var data=this.getData(),
-                 $key=this.dom.find('.tag-key');
-             $key.each(function(){
-                 var $this=$(this),
-                     key=$this.data('key'),
-                     //根据情况来设定展示形式
-                     fun=$(this).hasClass('input-text')?$this['val']:$this['html'];
-                 if(data[key]!==undefined){
-                    fun.call($this,data[key]);   
-                 }
-             });
+             var data=this.getData();
+             this.setSerializeData(data);
+              //判断特征值
+             this.checkTabFeature();
              return this;
          },
          /**
           *保存该标签到服务器
           */
-         saveTag:function(){
-             
+         saveTag:function(callback){
+             var _data=this.getData(),
+                url=Configs.serverUrl+(_data.tagId?'/webapp/AjaxUpdateLable.do':'/webapp/AjaxCreateLable.do');
+             function processData(putin){
+                 var putout;
+                 putout={
+                    id:putin.tagId,
+                    functionName:putin.title,
+                    labelType:putin.isEvent?2:1,
+                    pos:putin.pos,
+                    size:putin.size,
+                    css:putin.css,
+                    featureSenior:putin.selector,
+                    dataSource:putin.dataSource,
+                    rule:putin.rule,
+                    serviceAppName:putin.serviceName,
+                    methodName:putin.methodName,
+                    ifName:putin.interfaceName,
+                    tc:putin.testCase,
+                    dangerousArea:putin.bugs,
+                    owner:putin.coder,
+                    eventName:putin.eventType,
+                    feature:putin.character,
+                    comurl:putin.commonUrl
+                 };
+                 return putout;
+             }
+             $.ajax({
+                url:url,
+                dataType:'jsonp',
+                data:{
+                    query:JSON.stringify(processData(_data))
+                },
+                success:function(o){
+                    if(o&&o.success){
+                        callback&&callback(o.result);
+                    }
+                }
+            });   
          },
          /**
           *删除标签 
@@ -177,6 +245,7 @@
            var title=this.dom.find('h2.header span.title');
            size.width &&  title.width(size.width);
            size.height && title.height(size.height);
+           return this;
          },
          /**
           *重载调整位置 
@@ -188,6 +257,7 @@
                      left:Core.originLeft(data.pos.left),
                      top:data.pos.top
                  });
+            return self;
          }
          
      });

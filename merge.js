@@ -174,8 +174,8 @@ var done=function(){
         'http://ali-54473/markpage/js/notify.js',
         'http://ali-54473/markpage/js/template.js',     //所有的页面模版
         'http://ali-54473/markpage/js/dialog.js',
-        'http://ali-54473/markpage/js/tag.js',       //标签构造类
         'http://ali-54473/markpage/js/core.js',
+        'http://ali-54473/markpage/js/tag.js',       //标签构造类
         'http://ali-54473/markpage/js/pagetag.js',      //页面标签
         'http://ali-54473/markpage/js/rightmenu.js',
         'http://ali-54473/markpage/js/toolbar.js',

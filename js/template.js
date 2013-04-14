@@ -1,7 +1,7 @@
 (function(Tool){
     Tool.Template={
         //普通对话框的基本模版
-        dialog:'<div class="dialog">\
+        dialog:'<div class="pmdialog">\
                 <h2 class="header">默认标题</h2>\
                 <div class="content">默认内容</div>\
                 <div class="footer fd-clr">\
@@ -21,11 +21,14 @@
                  </div>',
         //页面设置对话框模版
         pageSettingDialog:'<div class="setting-list">\
-                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text" readonly="readonly" class="input-text character-url"/></dd></dl>\
-                    <dl class="fd-clr"><dt>页面宽度:</dt><dd><input type="text" class="input-text page-width"/>&nbsp;px</dd></dl>\
+                    <dl class="fd-clr"><dt>页面名称:</dt><dd><input type="text" value="" data-key="title" class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面特征Url:</dt><dd><input type="text"  data-key="charater"  readonly="readonly" class="input-text tag-key character-url"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面宽度:</dt><dd><input type="text" data-key="width" class="input-text tag-key"/>&nbsp;px</dd></dl>\
+                    <dl class="fd-clr"><dt>页面Tab特征值:</dt><dd><input type="text" placeholder="如果有多tab的时候填写，用,分割" data-key="feature"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>页面出现条件:</dt><dd><input type="text" data-key="condition" class="input-text tag-key"/></dd></dl>\
                   </div>',
         //添加普通标签对话框模版
-        newNormalTag:'<div class="setting-list normal-tag-setting">\
+        newNormalTag:'<div class="setting-list normal-tag-setting" style="width:250px;">\
                     <input type="hidden" data-key="isEvent" class="tag-key" value="false"/>\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>元素选择器:</dt><dd><input type="text"   data-key="selector" class="input-text tag-key"/></dd></dl>\
@@ -39,22 +42,20 @@
                     <dl class="fd-clr"><dt>开发&测试负责人:</dt><dd><input type="text"  data-key="coder"  class="input-text tag-key"/></dd></dl>\
                   </div>',
         //添加普通标签对话框模版
-        newEventTag:'<div class="setting-list event-tag-setting">\
+        newEventTag:'<div class="setting-list event-tag-setting"  style="width:250px;">\
                     <input type="hidden" data-key="isEvent" class="tag-key" value="true"/>\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><input type="text"  data-key="title"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>特征参数标识:</dt><dd><input type="text"   data-key="character" class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>当前元素选择器:</dt><dd><input type="text"  data-key="selector"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>事件类型:</dt><dd><input type="text"   data-key="eventType" class="input-text tag-key"/></dd></dl>\
                   </div>',
         //事件标签
-        eventTag:'<div class="setting-list event-tag-detail">\
+        eventTag:'<div class="setting-list tag-detail event-tag-detail">\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><span class="tag-key"  data-key="title"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>特征参数标识:</dt><dd><span class="tag-key"  data-key="character"></span></dd></dl>\
                     <dl class="fd-clr"><dt>当前元素选择器:</dt><dd><span class="tag-key"  data-key="selector"></span></dd></dl>\
                     <dl class="fd-clr"><dt>事件类型:</dt><dd><span class="tag-key"  data-key="eventType"></span></dd></dl>\
                   </div>',
         //普通标签
-        normalTag:'<div class="setting-list normal-tag-setting">\
+        normalTag:'<div class="setting-list tag-detail normal-tag-detail">\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><span class="tag-key" data-key="title"></span></dd></dl>\
                     <dl class="fd-clr"><dt>元素选择器:</dt><dd><span class="tag-key"  data-key="selector"></span></dd></dl>\
                     <dl class="fd-clr"><dt>数据源:</dt><dd><span class="tag-key"  data-key="dataSource"></span></dd></dl>\
@@ -77,6 +78,10 @@
         //标签操作栏
         tagOpbar:'<a href="#" class="button" data-button="edit">编辑</a>\
                   <a href="#" class="button" data-button="delete">删除</a>\
-                  <a href="#" class="button" data-button="fold">收起</a>'
+                  <a href="#" class="button" data-button="fold">收起</a>',
+        //选择tab特征值
+        featureDialog:'<div class="setting-list choose-tab-feature">\
+                        <dl class="fd-clr"><dt>选择Tab特征值:</dt><dd><select class="tab-features"></select></dd></dl>\
+                      </div>'
     };
 })(Util);

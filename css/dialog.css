@@ -1,28 +1,28 @@
-.dialog{
+.pmdialog{
 	display: none;
 	position:absolute;
 	z-index: 3000;
 	background: #fff;
 	border: 8px solid #999;
 }
-.dialog.move{
+.pmdialog.move{
 	cursor:move;
 	opacity: 0.4!important;
 }
 
-.dialog .header{
+.pmdialog .header{
     line-height: 32px;
     background-color: #f0f0f0;
     padding-left: 12px;
     font-size: 14px;
     font-weight: bold;
 }
-.dialog .header .title{
+.pmdialog .header .title{
 	display:inline-block;
 	overflow:hidden;
 }
-.dialog .header .resize-bar{display:none;}
-.dialog.dialog-tag-fold .header .resize-bar{
+.pmdialog .header .resize-bar{display:none;}
+.pmdialog.pmdialog-tag-fold .header .resize-bar{
 	display: inline-block;
 	height: 12px;
 	width: 7px;
@@ -39,30 +39,30 @@
 	line-height: 14px;
 	letter-spacing: -1px;
 }
-.dialog.move .header,
-.dialog.dialog-drag .header{
+.pmdialog.move .header,
+.pmdialog.pmdialog-drag .header{
 	cursor: move;
 }
-.dialog.dialog-tag-fold{
+.pmdialog.pmdialog-tag-fold{
 	border:1px solid #A0A0A0;
 	opacity:0.8;
 }
-.dialog .header .button,
-.dialog.dialog-tag-fold .content,
-.dialog.dialog-tag-fold .footer{
+.pmdialog .header .button,
+.pmdialog.pmdialog-tag-fold .content,
+.pmdialog.pmdialog-tag-fold .footer{
 	display:none;
 }
-.dialog.dialog-tag-event.dialog-tag-fold{
+.pmdialog.pmdialog-tag-event.pmdialog-tag-fold{
 	background-color:#ACE1AF;
 }
-.dialog.dialog-tag-fold{
+.pmdialog.pmdialog-tag-fold{
 	background-color:#FFA07B;
 }
-.dialog.dialog-tag-fold .header{
+.pmdialog.pmdialog-tag-fold .header{
 	background:none;
 	overflow:hidden;
 }
-.dialog.dialog-tag-fold .header .button{
+.pmdialog.pmdialog-tag-fold .header .button{
 	display: inline-block;
 	border: none;
 	background: none;
@@ -72,16 +72,18 @@
 	padding:0 6px;
 	line-height: 24px;
 }
-.dialog .content{
+.pmdialog .content{
 	padding:8px;
+	width:auto;
 }
-.dialog .footer{
+.pmdialog .footer{
     zoom: 1;
+    width:auto;
     padding:8px;
     background-color: #fff;
     border-top: 1px solid #f0f0f0;
 }
-.dialog .button{
+.pmdialog .button{
 	vertical-align: middle;
     cursor: pointer;
     display: inline-block;
@@ -112,20 +114,20 @@
 /**
  * 	设置页面参数的对话框
  */
-.dialog .setting-list{
+.pmdialog .setting-list{
 }
-.dialog .setting-list dl{
+.pmdialog .setting-list dl{
 	padding:4px;
 }
-.dialog .setting-list dt{
+.pmdialog .setting-list dt{
 	float:left;
 	width:100px;
 	padding-right:8px;
 	text-align:right;
 }
-.dialog .setting-list dd{
+.pmdialog .setting-list dd{
 	float:left;
 }
-.dialog .setting-list .character-url{
+.pmdialog .setting-list .character-url{
 	width: 200px;
 }

@@ -11,7 +11,7 @@
         this.eventFun={};
         this.isDrag=isDrag;
         this.resizable=resizable;
-        isDrag&&this.dom.addClass('dialog-drag');
+        isDrag&&this.dom.addClass('pmdialog-drag');
         this.bind();
         //存储起来
         this.id=DialogList.length;
@@ -208,14 +208,33 @@
             return false;
         },
         serializeInput:function(){
-            var inputs=this.dom.find('input.tag-key'),
+            var inputs=this.dom.find('.tag-key'),
                 datas={};
             inputs.each(function(){
                 var $this=$(this),
                     key=$this.data('key');
-                datas[key]=$this.val();
+                datas[key]=$this.hasClass('input-text')?$this.val():$this.html();
             });
             return datas;
+        },
+        /**
+         *设置序列化的值 
+         */
+        setSerializeData:function(data){
+             var $key;
+             if(!data){
+                 return;
+             }
+             $key=this.dom.find('.tag-key');
+             $key.each(function(){
+                 var $this=$(this),
+                     key=$this.data('key'),
+                     //根据情况来设定展示形式
+                     fun=$(this).hasClass('input-text')?$this['val']:$this['html'];
+                 if(data[key]!==undefined){
+                    fun.call($this,data[key]);   
+                 }
+             });
         },
         bind:function(){
             var self=this;

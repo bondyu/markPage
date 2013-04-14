@@ -31,23 +31,23 @@
                 var output;
                 output={
                     tagId:from.id,
-                    title:from.functionName,
-                    isEvent:from.labelType==2,
-                    pos:from.pos,
-                    size:from.size,
-                    css:from.css,
-                    selector:from.featureSenior,
-                    dataSource:from.dataSource,
+                    title:from.functionname,
+                    isEvent:from.labeltype==2,
+                    pos:from.pos?JSON.parse(from.pos):null,
+                    size:from.size?JSON.parse(from.size):null,
+                    css:from.css?JSON.parse(from.css):null,
+                    selector:from.featuresenior,
+                    dataSource:from.datasource,
                     rule:from.rule,
-                    serviceName:from.serviceAppName,
-                    methodName:from.methodName,
-                    interfaceName:from.ifName,
+                    serviceName:from.serviceappName,
+                    methodName:from.methodname,
+                    interfaceName:from.ifname,
                     testCase:from.tc,
-                    bugs:from.dangerousArea,
+                    bugs:from.dangerousarea,
                     coder:from.owner,
-                    eventType:from.eventName,
-                    character:from.feature
-                   
+                    eventType:from.eventname,
+                    character:from.feature,
+                    commonUrl:from.comurl                   
                 };
                 return output;
             },
@@ -59,8 +59,13 @@
             },
             attach:function(){
               var self=this;
+              //加载所有标签
               Notify.attach('loadTags',function(data){
                   self.loadTags(data);
+              })
+              //卸载标签
+              .attach('unloadTags',function(data){
+                  self.unload();
               });  
             },
             unload:function(){

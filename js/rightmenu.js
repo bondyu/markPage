@@ -19,11 +19,37 @@
           });
         return dialog;
     }
-    
     var Menu={
             init:function(){
                 this.registerRightMouse();
                 this.initialMenus();
+            },
+            getNewDialog:function(){
+              return getNewDialog();
+            },
+            //判断是否需要加上tab特征值选择
+            checkTabFeature:function(){
+                var _dialog=this.getNewDialog(),
+                  data=Core.getPageData(),
+                  _html,flist,i,len,isSelected;
+                  
+              //是否有特征值
+              if(data.feature){
+                      flist=data.feature.split(',');
+                      _html=[];
+                  _html.push('<dl class="fd-clr"><dt>所属Tab特征参数:</dt><dd><select data-key="character"  class="input-text tag-key">');
+                  for(i=0,len=flist.length;i<len;i++){
+                      if(data.tabFeature==flist[i]){
+                          isSelected='selected="selected"';
+                      }else{
+                          isSelected='';
+                      }
+                      _html.push('<option value="'+flist[i]+'" '+isSelected+'>'+flist[i]+'</option>');
+                  }
+                  _html.push('</select></dd></dl>');
+                  _dialog.dom.find('div.setting-list').prepend(_html.join(''));
+              }
+              return _dialog;  
             },
             /***
              *创建右键菜单 
@@ -131,32 +157,43 @@
                 })
                 .addMenu('新建普通标签',function(e){
                     e.preventDefault();
-                    getNewDialog().setTemplate('新建普通标签',Tool.Template.newNormalTag)
+                    var _dialog=self.getNewDialog();
+                    _dialog.setTemplate('新建普通标签',Tool.Template.newNormalTag)
                                   .setEvent('confirm',function(){
-                                      var dialog=getNewDialog(),
-                                          tagData=dialog.serializeInput();
+                                      var tagData=_dialog.serializeInput(),
+                                          pos=_dialog.getDialogPosition();
+                                      $.extend(tagData,{
+                                         commonUrl:Core.getCharacter(),
+                                         pos: pos
+                                      });
                                       var tag=new Tag(tagData);
-                                      tag.show()
-                                         .setPosition(self.getCurrentRealPosition());
-                                      getNewDialog().hide();
+                                      tag.saveTag(function(tagId){
+                                          tag.setData({tagId:tagId});
+                                          tag.show();
+                                          _dialog.hide();
+                                      });
+                                      
                                   })
                                   .setPosition(self.getCurrentRealPosition())
                                   .show();
+                                  
+                    self.checkTabFeature();
                     
                 })
                 .addMenu('新建事件标签',function(e){
                     e.preventDefault();
-                    getNewDialog().setTemplate('新建事件标签',Tool.Template.newEventTag)
+                    var _dialog=self.getNewDialog();
+                    _dialog.setTemplate('新建事件标签',Tool.Template.newEventTag)
                                   .setEvent('confirm',function(){
-                                      var dialog=getNewDialog(),
-                                          tagData=dialog.serializeInput();
+                                      var tagData=_dialog.serializeInput();
                                       var tag=new Tag(tagData);
                                       tag.show()
                                          .setPosition(self.getCurrentRealPosition());
-                                      getNewDialog().hide();
+                                      _dialog.hide();
                                   })
                                   .setPosition(self.getCurrentRealPosition())
                                   .show();
+                   self.checkTabFeature();
                     
                 });  
             },

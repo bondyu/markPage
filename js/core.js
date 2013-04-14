@@ -47,7 +47,10 @@
               return DATA.width;  
             },
             getPageCharacter:function(){
-              return DATA.charaterUrl;  
+              return DATA.charater;  
+            },
+            getPageData:function(){
+              return DATA;  
             },
             /**
              *初始化页面信息 
@@ -61,9 +64,9 @@
                 }else{
                    isFromUrl={};
                 }
-                isFromUrl['comUrl']='1688.com';
+                isFromUrl['comUrl']=self.getPageCharacter();
                 DATA.width=self.valuatePageWidth();
-                
+                DATA.title=document.title;
                 $.ajax({
                     url:Configs.serverUrl+'/webapp/AjaxQueryPageList.do',
                     dataType:'jsonp',
@@ -76,15 +79,25 @@
                         var re;
                         if(o.success&&o.result&&o.result.length>0){
                             re=o.result[0];
-                            DATA.width=re['pagewidth'];
+                            if(re['pagewidth']){
+                                DATA.width=re['pagewidth'];
+                            }
+                            DATA.feature=re['feature'];
+                            DATA.condition=re['appearcondition'];
+                            if(re['name']){
+                                DATA.title=re['name']
+                            }
                             //如果页面存在特征值，有多个标签的情况下
-                            if(re['featrue']){
+                            if(DATA.feature){
                                 //要先选择哪个特征值
-                                Notify.notify('choosePageCharact',function(feature){
+                                Notify.notify('choosePageCharact',DATA.feature,function(feature){
+                                    self.choosePageCharact(feature);
                                     isFromUrl['feature']=feature;
+                                    Notify.notify('unloadTags');
                                     Notify.notify('loadTags',isFromUrl);
                                 });
                             }else{
+                                Notify.notify('unloadTags');
                                 Notify.notify('loadTags',isFromUrl);
                             }
                         }
@@ -92,38 +105,47 @@
                 });
             },
             /**
-             *设置页面宽度 
+             *用户选择页面特征值，tab那种的 ,
+             * 选择后的操作回调
              */
-            setPageWidth:function(width){
-                DATA.width=width;
+            choosePageCharact:function(feature){
+                DATA.tabFeature=feature;
+            },
+            getPageCharact:function(){
+              return   DATA.tabFeature;
+            },
+            /**
+             *设置页面 
+             */
+            updatePageParams:function(data,callback){
                 var self=this,
-                    data={
-                        pageWidth:width,
-                        comUrl:this.getPageCharacter(),
-                        totalUrl:location.href, //全部url
-                        feature:'a,b,c',//多tab的特征值
-                        appearCondition:'fslfs',//出现条件
-                        name:document.title//页面名称
+                    params= {
+                        pagewidth:data.width,  //页面宽度
+                        comurl:data.charater,  //页面特征Url
+                        feature:data.feature,//如果存在tab的话
+                        appearcondition:data.condtion,//页面出现条件
+                        name:data.title//页面名称
                     };
                 //发送消息
                 $.ajax({
-                    url:'http://alibaba-62762.hz.ali.com:8083/webapp/AjaxCreatePage.do',
+                    url:Configs.serverUrl+'/webapp/AjaxCreatePage.do',
                     dataType:'jsonp',
                     data:{
-                        query:JSON.stringify(data)
+                        query:JSON.stringify(params)
                     },
                     success:function(o){
-                        
+                        if(o&&o.success){
+                            $.extend(DATA,data);
+                            callback&&callback();
+                        }
                     }
                 });
-                //发送消息重新渲染tag的排列
-                Notify.notify('reflowTags');
             },
             /**
              *设置页面的特征URL 
              */
             setPageCharacter:function(chara){
-                DATA.charaterUrl=chara;
+                DATA.charater=chara;
             },
             /**
              *获取当前Url的 特征值
