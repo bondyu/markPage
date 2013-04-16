@@ -5,13 +5,18 @@
         Template=Tool.Template,
         Configs=Tool.Configs;
      function Tag(param){
-         Dialog.call(this,true,true);
+         Dialog.call(this,{
+             isDrag:true,
+             isCenter:false,
+             isShim:false,
+             resizable:true
+         });
          this.dom.addClass('mark-tag');
          this.data={};
          this.setData(param);
          this.init();
      } 
-     Tag.prototype=new Dialog(true);
+     Tag.prototype=new Dialog();
      $.extend(Tag.prototype,{
          init:function(){
              var self=this,
@@ -46,7 +51,6 @@
              this.updateTitle();
              //填充内容
              this.showTagDetail();
-             
              //隐藏
              this.setEvent('fold',function(){
                  self.fold();
@@ -57,7 +61,6 @@
              })
              //删除
              .setEvent('delete',function(){
-                 self.hide();
                  self.deleteTag();
              })
              //编辑
@@ -141,7 +144,8 @@
          expand:function(){
              this.dom.removeClass('pmdialog-tag-fold');
              this.setSize({
-                 height:'auto'
+                 height:'auto',
+                 width:'auto'
              });
              return this;
          },
@@ -206,7 +210,29 @@
           *删除标签 
           */
          deleteTag:function(){
-            this.destroy();   
+            var _this=this,
+                _data=_this.getData(),
+                url=Configs.serverUrl+'/webapp/AjaxDeleteLable.do'; 
+            $.ajax({
+                url:url,
+                dataType:'jsonp',
+                data:{
+                    query:JSON.stringify({
+                        id:_data.tagId
+                    })
+                },
+                success:function(o){
+                    if(o&&o.success){
+                        _this.destroyTag();   
+                    }
+                }
+            });   
+            
+         },
+         destroyTag:function(){
+             this.hide();
+             this.data=null;
+             this.destroy();
          },
          /**
           *重新设置大小 
@@ -259,7 +285,6 @@
                  });
             return self;
          }
-         
      });
      Tool.Tag=Tag;    
 })(Util,jQuery);

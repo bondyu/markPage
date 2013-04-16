@@ -42,7 +42,10 @@
             if(dialog){
                return dialog;
             }
-            dialog=new Tool.Dialog();
+            dialog=new Tool.Dialog({
+                isCenter:true,
+                isShim:true
+            });
             html=Template.pageSettingDialog;
             dialog.setTemplate('设置页面参数',html);
             dialog.setEvent('confirm',function(){
@@ -51,8 +54,22 @@
                     return;
                 }
                 Tool.Core.updatePageParams(data,function(){
-                    //发送消息重新渲染tag的排列
-                    Notify.notify('reflowTags');
+                    if(data.feature){//如果存在特征值
+                        Notify.notify('choosePageCharact',data.feature,function(feature){
+                            Tool.Core.choosePageCharact(feature);
+                            Notify.notify('unloadTags');
+                            Notify.notify('loadTags',{
+                                comurl:data.charater,
+                                feature:feature
+                            });
+                        });
+                    }else{
+                       //如果没有特征值，直接就加载标签？
+                        Notify.notify('unloadTags');
+                        Notify.notify('loadTags',{
+                            comurl:data.charater
+                        }); 
+                    }
                 });
                 dialog.hide();
             })
@@ -70,7 +87,10 @@
             if(featureDialog){
                return featureDialog;
             }
-            featureDialog=new Tool.Dialog();
+            featureDialog=new Tool.Dialog({
+                isShim:true,
+                isCenter:true
+            });
             html=Template.featureDialog;
             featureDialog.setTemplate('选择Tab特征参数',html);
             featureDialog.setEvent('close',function(){
@@ -116,6 +136,9 @@
                         callback&&callback(feature);
                   });
                   fd.show().setCenter().setTop();
+            })
+            .attach('showPageSetting',function(){
+                bar.find('a.set-page-paras').click();
             });
         }
     };

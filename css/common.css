@@ -37,6 +37,14 @@
 
 .input-text{
 	height: 22px;
+	width:220px;
+	vertical-align: middle;
+	background: url(http://img.china.alibaba.com/images/common/icon_v02/bg5.gif) repeat-x;
+	border: 1px solid #a0a0a0;
+}
+.input-textarea{
+	height: 50px;
+	width:220px;
 	vertical-align: middle;
 	background: url(http://img.china.alibaba.com/images/common/icon_v02/bg5.gif) repeat-x;
 	border: 1px solid #a0a0a0;

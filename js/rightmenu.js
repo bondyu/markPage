@@ -13,9 +13,25 @@
         if(dialog){
             return dialog;
         }
-        dialog=new Dialog(true);
+        dialog=new Dialog({
+            isDrag:true
+        });
         dialog.setEvent('close',function(){
                   dialog.hide();
+          })
+          .setEvent('confirm',function(){
+              var tagData=dialog.serializeInput(),
+                  pos=dialog.getDialogPosition();
+              $.extend(tagData,{
+                 commonUrl:Core.getCharacter(),
+                 pos: pos
+              });
+              var tag=new Tag(tagData);
+              tag.saveTag(function(tagId){
+                  tag.setData({tagId:tagId});
+                  tag.show();
+                  dialog.hide();
+              });
           });
         return dialog;
     }
@@ -159,24 +175,8 @@
                     e.preventDefault();
                     var _dialog=self.getNewDialog();
                     _dialog.setTemplate('新建普通标签',Tool.Template.newNormalTag)
-                                  .setEvent('confirm',function(){
-                                      var tagData=_dialog.serializeInput(),
-                                          pos=_dialog.getDialogPosition();
-                                      $.extend(tagData,{
-                                         commonUrl:Core.getCharacter(),
-                                         pos: pos
-                                      });
-                                      var tag=new Tag(tagData);
-                                      tag.saveTag(function(tagId){
-                                          tag.setData({tagId:tagId});
-                                          tag.show();
-                                          _dialog.hide();
-                                      });
-                                      
-                                  })
-                                  .setPosition(self.getCurrentRealPosition())
-                                  .show();
-                                  
+                          .setPosition(self.getCurrentRealPosition())
+                          .show();
                     self.checkTabFeature();
                     
                 })
@@ -184,17 +184,9 @@
                     e.preventDefault();
                     var _dialog=self.getNewDialog();
                     _dialog.setTemplate('新建事件标签',Tool.Template.newEventTag)
-                                  .setEvent('confirm',function(){
-                                      var tagData=_dialog.serializeInput();
-                                      var tag=new Tag(tagData);
-                                      tag.show()
-                                         .setPosition(self.getCurrentRealPosition());
-                                      _dialog.hide();
-                                  })
-                                  .setPosition(self.getCurrentRealPosition())
-                                  .show();
+                          .setPosition(self.getCurrentRealPosition())
+                          .show();
                    self.checkTabFeature();
-                    
                 });  
             },
             /**

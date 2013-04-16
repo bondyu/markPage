@@ -3,16 +3,23 @@
  */
 (function(Tool,$){
     var html=Tool.Template.dialog,
+        shim=Tool.Template.shim,
+        $body=$('body'),
         DialogList=[],
         //从3000开始计算
         zindex=2999;
-    var Dialog=function(isDrag,resizable){
-        this.dom=$(html).appendTo($('body')).css('z-index',++zindex);
+    var Dialog=function(config){
+        var config=config||{};
+        this.shim=config.isShim?$(shim).appendTo($body).css('z-index',++zindex):null;
+        this.dom=$(html).appendTo($body).css('z-index',++zindex);
         this.eventFun={};
-        this.isDrag=isDrag;
-        this.resizable=resizable;
-        isDrag&&this.dom.addClass('pmdialog-drag');
+        this.isDrag=config.isDrag;
+        this.isCenter=config.isCenter;
+        this.resizable=config.resizable;
+        this.isShim=config.isShim; //是否用遮罩
+        config.isDrag&&this.dom.addClass('pmdialog-drag');
         this.bind();
+        this.bindInput();
         //存储起来
         this.id=DialogList.length;
         DialogList.push(this);
@@ -35,7 +42,7 @@
                 dom=self.dom;
             dom.css({
                 left: (win.width() - dom.width()) / 2,
-                top: (win.height() - dom.height()) / 2
+                top: $body.scrollTop() + (win.height() - dom.height()) / 2
             });
             return self;
         },
@@ -44,16 +51,18 @@
          */
         resetPosition:function(params){
             var self=(params && params.data)||this;
-            self.setCenter();
+            self.isCenter && self.setCenter();
         },
         show:function(){
+            this.isShim&&this.shim.show();
             this.dom.show();
-            $(window).on('resize',this,this.resetPosition);
+            $(window).on('resize scroll',this,this.resetPosition);
             return this;
         },
         hide:function(){
             this.dom.hide();
-            $(window).off('resize',this.resetPosition);
+            this.isShim&&this.shim.hide();
+            $(window).off('resize scroll',this.resetPosition);
             return this;
         },
         setEvent:function(evenName,fun){
@@ -80,8 +89,10 @@
             dom.removeClass('move');
             doc.unbind('mousemove',self.mouseMove)
                 .unbind('mouseup',self.mouseUp)
-                .unbind('selectstart',self.disableSelect); ;
-            self.eventFun['dragend']&&self.eventFun['dragend']();
+                .unbind('selectstart',self.disableSelect);
+            if($.now()-dom.data('timer')>150){
+                self.eventFun['dragend']&&self.eventFun['dragend']();
+            }
         },
         /**
          *移动偏差距离 
@@ -109,15 +120,11 @@
         mouseDown:function(params){
             var self=params.data,
                 dom=self.dom,
-                //timer=dom.data('timer'),
+                timer=dom.data('timer',$.now()),
                 doc=$(document);
-            //if(timer){
-            //    clearTimeout(timer);
-           // }
-            //timer=setTimeout(function(){
                 //置顶操作
                 self.setTop();
-                
+                //如果不支持拖拽
                 if(!self.isDrag){
                     return;
                 }
@@ -128,8 +135,6 @@
                    .bind('mouseup',self,self.mouseUp)
                    .bind('selectstart',self.disableSelect);  
                 self.eventFun['dragstart']&&self.eventFun['dragstart']();
-           // },500);
-            
         },
         /**
          *调整大小偏移 
@@ -249,13 +254,39 @@
             
         },
         /**
+          *给单行文本增加多行效果 
+          */
+         bindInput:function(){
+             this.dom.on('focus','input.input-expandable',function(){
+                var $this=$(this),
+                    $parent=$this.parent(),
+                    $instead=$parent.find('textarea.input-expandable');
+                 $this.hide();
+                 if($instead.length<1){
+                     $instead=$('<textarea class="input-textarea input-expandable"></textarea>').appendTo($parent);
+                 }
+                 $instead.val($this.val());
+                 $instead.show().focus();
+             })
+             .on('blur','textarea.input-expandable',function(){
+                var $this=$(this),
+                    _val=$this.val(),
+                    $parent=$this.parent(),
+                    $instead=$parent.find('input.input-expandable');
+                 $this.hide();
+                 $instead.val(_val);
+                 $instead.attr('title',_val);
+                 $instead.show();
+             });
+         },
+        /**
          *销毁对话框 
          */
         destroy:function(){
             var self=this;
             this.dom.off('click')
                     .off('mousedown','h2.header');
-            this.eventFun={};
+            this.eventFun=null;
             this.isDrag=null;
             DialogList.splice(DialogList.indexOf(this),1);
             this.id=null;

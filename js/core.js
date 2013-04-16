@@ -100,6 +100,8 @@
                                 Notify.notify('unloadTags');
                                 Notify.notify('loadTags',isFromUrl);
                             }
+                        }else{
+                            Notify.notify('showPageSetting');
                         }
                     }
                 });

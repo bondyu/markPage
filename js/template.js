@@ -11,6 +11,7 @@
                     </div>\
                 </div>\
              </div>',
+        shim:'<div class="pmshim"></div>',
         //工具条的模版
         toolbar:'<div class="toolbar">\
                     <div class="op-panel">\
@@ -28,12 +29,12 @@
                     <dl class="fd-clr"><dt>页面出现条件:</dt><dd><input type="text" data-key="condition" class="input-text tag-key"/></dd></dl>\
                   </div>',
         //添加普通标签对话框模版
-        newNormalTag:'<div class="setting-list normal-tag-setting" style="width:250px;">\
-                    <input type="hidden" data-key="isEvent" class="tag-key" value="false"/>\
+        newNormalTag:'<div class="setting-list normal-tag-setting" style="width:350px;">\
+                    <input type="hidden" data-key="isEvent" class="input-text tag-key" value="false"/>\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>元素选择器:</dt><dd><input type="text"   data-key="selector" class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>数据源:</dt><dd><input type="text"  data-key="dataSource"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>规则:</dt><dd><input type="text"  data-key="rule"  class="input-text tag-key"/></dd></dl>\
+                    <dl class="fd-clr"><dt>规则:</dt><dd><input type="text"  data-key="rule"  class="input-text tag-key input-expandable"/></dd></dl>\
                     <dl class="fd-clr"><dt>服务化名称:</dt><dd><input type="text"  data-key="serviceName"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>方法名称:</dt><dd><input type="text"  data-key="methodName"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>接口名称:</dt><dd><input type="text"  data-key="interfaceName"  class="input-text tag-key"/></dd></dl>\
@@ -42,8 +43,8 @@
                     <dl class="fd-clr"><dt>开发&测试负责人:</dt><dd><input type="text"  data-key="coder"  class="input-text tag-key"/></dd></dl>\
                   </div>',
         //添加普通标签对话框模版
-        newEventTag:'<div class="setting-list event-tag-setting"  style="width:250px;">\
-                    <input type="hidden" data-key="isEvent" class="tag-key" value="true"/>\
+        newEventTag:'<div class="setting-list event-tag-setting"  style="width:350px;">\
+                    <input type="hidden" data-key="isEvent" class="input-text tag-key" value="true"/>\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><input type="text"  data-key="title"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>当前元素选择器:</dt><dd><input type="text"  data-key="selector"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>事件类型:</dt><dd><input type="text"   data-key="eventType" class="input-text tag-key"/></dd></dl>\
