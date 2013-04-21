@@ -60,7 +60,7 @@
                     router=URL.getCommands('hash'),
                     isFromUrl=/pagemark=/i.test(router); //是否是从后来过来的，携带查询条件的
                 if(isFromUrl){
-                   isFromUrl=URL.parseObject('hash')['pagemark'];
+                   isFromUrl=URL.parseObject('hash','pagemark');
                 }else{
                    isFromUrl={};
                 }

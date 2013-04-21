@@ -127,17 +127,18 @@ Util.Url={
     /**
      *获取当前的指令状态 
      */
-    getCommands:function(type){
+    getCommands:function(type,names){
         var cmd=location[type||'hash'],
-            len=cmd.length-1;
-        if(len>1){
-            return decodeURIComponent(cmd.substr(1,cmd.length-1));
+            begin=names?names.length+1:1,
+            end=cmd.length-begin;
+        if(end>1){
+            return decodeURIComponent(cmd.substr(begin,cmd.length-1));
         }else{
             return '';
         }
     },
-    parseObject:function(type){
-        var source=this.getCommands(type||'search'),
+    parseObject:function(type,names){
+        var source=this.getCommands(type||'search',names),
             result={};
         function parseObject(str){
             var o;
