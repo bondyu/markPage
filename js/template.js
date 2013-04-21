@@ -15,7 +15,7 @@
         //工具条的模版
         toolbar:'<div class="toolbar">\
                     <div class="op-panel">\
-                        <a class="button initmarks" href="#">展示所有标签</a>\
+                        <a class="button initmarks" href="#">展示标签</a>\
                         <a class="button hidemarks" href="#">隐藏所有标签</a>\
                         <a class="button set-page-paras" href="#">设置页面参数</a>\
                     </div>\
