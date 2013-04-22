@@ -14,7 +14,7 @@ var pageMark={
       head = document.getElementsByTagName("head")[0];
       script = document.createElement("script");
       script.type = "text/javascript";
-      script.src = 'http://ali-54473/markpage/merge.js';
+      script.src = 'http://alibaba-62762.hz.ali.com:8888/ss/e2/merge.js';
       script.charset='utf-8';
       head.appendChild(script);
   },

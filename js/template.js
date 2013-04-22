@@ -29,10 +29,10 @@
                     <dl class="fd-clr"><dt>页面出现条件:</dt><dd><input type="text" data-key="condition" class="input-text tag-key"/></dd></dl>\
                   </div>',
         //添加普通标签对话框模版
+                 
         newNormalTag:'<div class="setting-list normal-tag-setting" style="width:350px;">\
                     <input type="hidden" data-key="isEvent" class="input-text tag-key" value="false"/>\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>元素选择器:</dt><dd><input type="text"   data-key="selector" class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>数据源:</dt><dd><input type="text"  data-key="dataSource"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>规则:</dt><dd><input type="text"  data-key="rule"  class="input-text tag-key input-expandable"/></dd></dl>\
                     <dl class="fd-clr"><dt>服务化名称:</dt><dd><input type="text"  data-key="serviceName"  class="input-text tag-key"/></dd></dl>\
@@ -58,7 +58,6 @@
         //普通标签
         normalTag:'<div class="setting-list tag-detail normal-tag-detail">\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><span class="tag-key" data-key="title"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>元素选择器:</dt><dd><span class="tag-key"  data-key="selector"></span></dd></dl>\
                     <dl class="fd-clr"><dt>数据源:</dt><dd><span class="tag-key"  data-key="dataSource"></span></dd></dl>\
                     <dl class="fd-clr"><dt>规则:</dt><dd><span class="tag-key"  data-key="rule"></span></dd></dl>\
                     <dl class="fd-clr"><dt>服务化名称:</dt><dd><span class="tag-key"  data-key="serviceName"></span></dd></dl>\
