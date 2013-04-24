@@ -180,6 +180,15 @@
                     self.checkTabFeature();
                     
                 })
+                .addMenu('新建简单标签',function(e){
+                    e.preventDefault();
+                    var _dialog=self.getNewDialog();
+                    _dialog.setTemplate('新建简单标签',Tool.Template.newSimpleTag)
+                          .setPosition(self.getCurrentRealPosition())
+                          .show();
+                    self.checkTabFeature();
+                    
+                })
                 .addMenu('新建事件标签',function(e){
                     e.preventDefault();
                     var _dialog=self.getNewDialog();

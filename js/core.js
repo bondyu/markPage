@@ -82,8 +82,17 @@
                             if(re['pagewidth']){
                                 DATA.width=re['pagewidth'];
                             }
+                            if(re['totalurl']){
+                                DATA.totalurl=re['totalurl'];
+                            }
+                            if(re['appname']){
+                            	DATA.appname = re['appname'];
+                            }
+                            if(re['pagename']){
+                            	DATA.pagename = re['pagename'];
+                            }
                             DATA.feature=re['feature'];
-                            DATA.condition=re['appearcondition'];
+                            DATA.condition=re['appearcondition'];                         
                             if(re['name']){
                                 DATA.title=re['name']
                             }
@@ -125,9 +134,12 @@
                         pagewidth:data.width,  //页面宽度
                         comurl:data.charater,  //页面特征Url
                         feature:data.feature,//如果存在tab的话
-                        appearcondition:data.condtion,//页面出现条件
-                        name:data.title//页面名称
+                        appearcondition:data.condition,//页面出现条件
+                        name:data.title,//页面名称
+                        appname:data.appname
                     };
+                	params["totalurl"]=window.location.href;
+                	
                 //发送消息
                 $.ajax({
                     url:Configs.serverUrl+'/webapp/AjaxCreatePage.do',

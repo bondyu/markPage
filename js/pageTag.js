@@ -32,7 +32,7 @@
                 output={
                     tagId:from.id,
                     title:from.functionname,
-                    isEvent:from.labeltype==2,
+                    labletype:from.labletype,
                     pos:from.pos?JSON.parse(from.pos):null,
                     size:from.size?JSON.parse(from.size):null,
                     css:from.css?JSON.parse(from.css):null,
