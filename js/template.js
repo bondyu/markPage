@@ -27,24 +27,29 @@
                     <dl class="fd-clr"><dt>页面宽度:</dt><dd><input type="text" data-key="width" class="input-text tag-key"/>&nbsp;px</dd></dl>\
                     <dl class="fd-clr"><dt>页面Tab特征值:</dt><dd><input type="text" placeholder="如果有多tab的时候填写，用,分割" data-key="feature"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>页面出现条件:</dt><dd><input type="text" data-key="condition" class="input-text tag-key"/></dd></dl>\
+        	        <dl class="fd-clr"><dt>应用名:</dt><dd><input type="text" data-key="appname" class="input-text tag-key"/></dd></dl>\
                   </div>',
         //添加普通标签对话框模版
+        newSimpleTag:'<div class="setting-list simple-tag-setting" style="width:350px;">\
+		            <input type="hidden" data-key="labletype" class="input-text tag-key" value="3"/>\
+		            <dl class="fd-clr"><dt>名称:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
+		            <dl class="fd-clr"><dt>注释:</dt><dd><input type="text"  data-key="simplecontent"  class="input-text tag-key"/></dd></dl>\
+		            </div>',
+                  
         newNormalTag:'<div class="setting-list normal-tag-setting" style="width:350px;">\
-                    <input type="hidden" data-key="isEvent" class="input-text tag-key" value="false"/>\
+                    <input type="hidden" data-key="labletype" class="input-text tag-key" value="1"/>\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>元素选择器:</dt><dd><input type="text"   data-key="selector" class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>数据源:</dt><dd><input type="text"  data-key="dataSource"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>规则:</dt><dd><input type="text"  data-key="rule"  class="input-text tag-key input-expandable"/></dd></dl>\
                     <dl class="fd-clr"><dt>服务化名称:</dt><dd><input type="text"  data-key="serviceName"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>方法名称:</dt><dd><input type="text"  data-key="methodName"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>接口名称:</dt><dd><input type="text"  data-key="interfaceName"  class="input-text tag-key"/></dd></dl>\
-                    <dl class="fd-clr"><dt>测试用例:</dt><dd><input type="text"  data-key="testCase"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>雷区:</dt><dd><input type="text"  data-key="bugs"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>开发&测试负责人:</dt><dd><input type="text"  data-key="coder"  class="input-text tag-key"/></dd></dl>\
                   </div>',
-        //添加普通标签对话框模版
+        //添加事件标签对话框模版
         newEventTag:'<div class="setting-list event-tag-setting"  style="width:350px;">\
-                    <input type="hidden" data-key="isEvent" class="input-text tag-key" value="true"/>\
+                    <input type="hidden" data-key="labletype" class="input-text tag-key" value="2"/>\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><input type="text"  data-key="title"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>当前元素选择器:</dt><dd><input type="text"  data-key="selector"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>事件类型:</dt><dd><input type="text"   data-key="eventType" class="input-text tag-key"/></dd></dl>\
@@ -55,10 +60,13 @@
                     <dl class="fd-clr"><dt>当前元素选择器:</dt><dd><span class="tag-key"  data-key="selector"></span></dd></dl>\
                     <dl class="fd-clr"><dt>事件类型:</dt><dd><span class="tag-key"  data-key="eventType"></span></dd></dl>\
                   </div>',
+        simpleTag:'<div class="setting-list tag-detail event-tag-detail">\
+		            <dl class="fd-clr"><dt>标签名称:</dt><dd><span class="tag-key"  data-key="title"></span></dd></dl>\
+		            <dl class="fd-clr"><dt>注释:</dt><dd><span class="tag-key"  data-key="simplecontent"></span></dd></dl>\
+		          </div>',
         //普通标签
         normalTag:'<div class="setting-list tag-detail normal-tag-detail">\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><span class="tag-key" data-key="title"></span></dd></dl>\
-                    <dl class="fd-clr"><dt>元素选择器:</dt><dd><span class="tag-key"  data-key="selector"></span></dd></dl>\
                     <dl class="fd-clr"><dt>数据源:</dt><dd><span class="tag-key"  data-key="dataSource"></span></dd></dl>\
                     <dl class="fd-clr"><dt>规则:</dt><dd><span class="tag-key"  data-key="rule"></span></dd></dl>\
                     <dl class="fd-clr"><dt>服务化名称:</dt><dd><span class="tag-key"  data-key="serviceName"></span></dd></dl>\

@@ -22,15 +22,25 @@
              var self=this,
                  dom=self.dom,
                  data=this.getData(),
-                 html;
+                 html,
+                 tagDetailHtml,
+                 tagEditHtml;
              //设置模版内容
-             tagDetailHtml=data.isEvent? Template.eventTag:Template.normalTag;   
-             tagEditHtml=data.isEvent? Template.newEventTag:Template.newNormalTag;   
+             if (data.labletype == "1"){
+            	 tagDetailHtml = Template.normalTag;
+            	 tagEditHtml = Template.newNormalTag;
+             } else if (data.labletype == "2"){
+            	 tagDetailHtml = Template.eventTag;
+            	 tagEditHtml = Template.newEventTag;
+             } else if (data.labletype == "3"){
+            	 tagDetailHtml = Template.simpleTag;
+            	 tagEditHtml = Template.newSimpleTag;
+             }  
              this.setTemplate(Template.defaultTitle,tagDetailHtml, Template.tagOpbar);
              /**
               *增加事件标签样式 
               */
-             if(data.isEvent){
+             if(data.labletype =="2"){
                  dom.addClass('pmdialog-tag-event');
              }
              //设定位置
@@ -174,7 +184,7 @@
                  putout={
                     id:putin.tagId,
                     functionName:putin.title,
-                    labelType:putin.isEvent?2:1,
+                    lableType:putin.labletype,
                     pos:putin.pos,
                     size:putin.size,
                     css:putin.css,
@@ -189,8 +199,12 @@
                     owner:putin.coder,
                     eventName:putin.eventType,
                     feature:putin.character,
-                    comurl:putin.commonUrl
+                    comurl:putin.commonUrl,
+                    simplecontent:putin.simplecontent
                  };
+                 putout["totalUrl"]=Data.totalurl;
+                 putout["appname"]=Data.appname;
+                 putout["pagename"]=Data.title;
                  return putout;
              }
              $.ajax({
