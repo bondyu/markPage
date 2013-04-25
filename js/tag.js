@@ -200,7 +200,7 @@
                     eventName:putin.eventType,
                     feature:putin.character,
                     comurl:putin.commonUrl,
-                    simplecontent:putin.simplecontent
+                    simplecontent:putin.simpleContent
                  };
                  putout["totalUrl"]=Data.totalurl;
                  putout["appname"]=Data.appname;
