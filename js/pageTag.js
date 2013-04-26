@@ -47,7 +47,8 @@
                     coder:from.owner,
                     eventType:from.eventname,
                     character:from.feature,
-                    commonUrl:from.comurl                   
+                    commonUrl:from.comurl,
+                    simpleContent:from.simplecontent
                 };
                 return output;
             },

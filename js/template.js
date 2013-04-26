@@ -33,7 +33,7 @@
         newSimpleTag:'<div class="setting-list simple-tag-setting" style="width:350px;">\
 		            <input type="hidden" data-key="labletype" class="input-text tag-key" value="3"/>\
 		            <dl class="fd-clr"><dt>名称:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
-		            <dl class="fd-clr"><dt>注释:</dt><dd><input type="text"  data-key="simplecontent"  class="input-text tag-key"/></dd></dl>\
+		            <dl class="fd-clr"><dt>注释:</dt><dd><input type="text"  data-key="simpleContent"  class="input-text tag-key input-expandable"/></dd></dl>\
 		            </div>',
                   
         newNormalTag:'<div class="setting-list normal-tag-setting" style="width:350px;">\
@@ -62,7 +62,7 @@
                   </div>',
         simpleTag:'<div class="setting-list tag-detail event-tag-detail">\
 		            <dl class="fd-clr"><dt>标签名称:</dt><dd><span class="tag-key"  data-key="title"></span></dd></dl>\
-		            <dl class="fd-clr"><dt>注释:</dt><dd><span class="tag-key"  data-key="simplecontent"></span></dd></dl>\
+		            <dl class="fd-clr"><dt>注释:</dt><dd><span class="tag-key"  data-key="simpleContent"></span></dd></dl>\
 		          </div>',
         //普通标签
         normalTag:'<div class="setting-list tag-detail normal-tag-detail">\

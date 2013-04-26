@@ -92,7 +92,8 @@
                             	DATA.pagename = re['pagename'];
                             }
                             DATA.feature=re['feature'];
-                            DATA.condition=re['appearcondition'];                         
+                            DATA.condition=re['appearcondition'];
+                            
                             if(re['name']){
                                 DATA.title=re['name']
                             }
@@ -109,10 +110,11 @@
                                 Notify.notify('unloadTags');
                                 Notify.notify('loadTags',isFromUrl);
                             }
-                        }else{
+                        }
+                        /*else{
                             Notify.notify('showPageSetting');
                         }
-                    }
+*/                    }
                 });
             },
             /**
