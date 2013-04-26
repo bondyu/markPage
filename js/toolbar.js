@@ -112,7 +112,16 @@
             })
             .on('click.toolbar','a.initmarks',function(e){
                 e.preventDefault();
-                PageTag.showAllTags();
+                myCondition = Util.Data.page.condition;
+                if (myCondition !=null &&myCondition !=""){
+                	window.open(myCondition);
+                }
+                if (Util.Data.page.appname == null){
+                	 Notify.notify('showPageSetting');
+                }else {
+                	PageTag.showAllTags();
+                }
+               /* PageTag.showAllTags();*/
             })
             .on('click.toolbar','a.hidemarks',function(e){
                 e.preventDefault();

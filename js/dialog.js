@@ -227,6 +227,8 @@
          */
         setSerializeData:function(data){
              var $key;
+             tcUrl = Tool.Configs['serverUrl']+"/webapp/tc.htm";
+             data["testCase"]="<a href="+tcUrl+" target='view_window'>查看用例</a>";
              if(!data){
                  return;
              }

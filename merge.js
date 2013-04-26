@@ -126,6 +126,9 @@ Util.Url={
     
     /**
      *获取当前的指令状态 
+    
+    /**
+     *获取当前的指令状态 
      */
     getCommands:function(type,names){
         var cmd=location[type||'hash'],
@@ -165,28 +168,28 @@ Util.Common.log(Util.Url.getCommands());
  */
 var done=function(){
     Util.Loader.asyncLoad([
-        'http://ali-54473/markpage/css/common.css',   //基本样式
-        'http://ali-54473/markpage/css/dialog.css',   //对话框基本样式
-        'http://ali-54473/markpage/css/toolbar.css',  //页面工具条样式
-        'http://ali-54473/markpage/css/tag.css',      //基本标签样式
-        'http://ali-54473/markpage/css/newtag.css',   //新建标签样式
-        'http://ali-54473/markpage/css/mouseright.css',   //鼠标右键样式
-        'http://ali-54473/markpage/js/data.js',         //存储数据用
-        'http://ali-54473/markpage/js/notify.js',
-        'http://ali-54473/markpage/js/template.js',     //所有的页面模版
-        'http://ali-54473/markpage/js/dialog.js',
-        'http://ali-54473/markpage/js/core.js',
-        'http://ali-54473/markpage/js/tag.js',       //标签构造类
-        'http://ali-54473/markpage/js/pagetag.js',      //页面标签
-        'http://ali-54473/markpage/js/rightmenu.js',
-        'http://ali-54473/markpage/js/toolbar.js',
-        'http://ali-54473/markpage/js/mvc.js',
-        'http://ali-54473/markpage/js/class.js',
-        'http://ali-54473/markpage/js/tag/view.js',
-        'http://ali-54473/markpage/js/tag/controller.js',
-        'http://ali-54473/markpage/js/tag/model.js',
-        'http://ali-54473/markpage/js/load.js',         //重新加载初始化
-        'http://ali-54473/markpage/js/unload.js'        //卸载插件内容
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/css/common.css',   //基本样式
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/css/dialog.css',   //对话框基本样式
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/css/toolbar.css',  //页面工具条样式
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/css/tag.css',      //基本标签样式
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/css/newtag.css',   //新建标签样式
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/css/mouseright.css',   //鼠标右键样式
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/data.js',         //存储数据用
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/notify.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/template.js',     //所有的页面模版
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/dialog.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/core.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/tag.js',       //标签构造类
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/pageTag.js',      //页面标签
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/rightmenu.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/toolbar.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/mvc.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/class.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/tag/view.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/tag/controller.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/tag/model.js',
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/load.js',         //重新加载初始化
+        'http://alibaba-62762.hz.ali.com:8888/ss/e2/js/unload.js'        //卸载插件内容
     ],function(){
         //下载完了就执行一下,开始加载页面的所有标签
         window.postMessage('loadpagemark','*');
