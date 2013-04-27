@@ -181,6 +181,9 @@
                 url=Configs.serverUrl+(_data.tagId?'/webapp/AjaxUpdateLable.do':'/webapp/AjaxCreateLable.do');
              function processData(putin){
                  var putout;
+                 if(putin.size&&putin.size.width){
+                    putin.size.width-=94;
+                 }
                  putout={
                     id:putin.tagId,
                     functionName:putin.title,

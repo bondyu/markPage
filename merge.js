@@ -132,7 +132,7 @@ Util.Url={
      */
     getCommands:function(type,names){
         var cmd=location[type||'hash'],
-            begin=names?names.length+1:1,
+            begin=names?names.length+2:1,
             end=cmd.length-begin;
         if(end>1){
             return decodeURIComponent(cmd.substr(begin,cmd.length-1));
