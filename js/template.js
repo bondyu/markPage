@@ -31,13 +31,13 @@
                   </div>',
         //添加普通标签对话框模版
         newSimpleTag:'<div class="setting-list simple-tag-setting" style="width:350px;">\
-		            <input type="hidden" data-key="labletype" class="input-text tag-key" value="3"/>\
+		            <input type="hidden" data-key="labelType" class="input-text tag-key" value="3"/>\
 		            <dl class="fd-clr"><dt>名称:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
 		            <dl class="fd-clr"><dt>注释:</dt><dd><input type="text"  data-key="simpleContent"  class="input-text tag-key input-expandable"/></dd></dl>\
 		            </div>',
                   
         newNormalTag:'<div class="setting-list normal-tag-setting" style="width:350px;">\
-                    <input type="hidden" data-key="labletype" class="input-text tag-key" value="1"/>\
+                    <input type="hidden" data-key="labelType" class="input-text tag-key" value="1"/>\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><input type="text" data-key="title"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>数据源:</dt><dd><input type="text"  data-key="dataSource"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>规则:</dt><dd><input type="text"  data-key="rule"  class="input-text tag-key input-expandable"/></dd></dl>\
@@ -49,7 +49,7 @@
                   </div>',
         //添加事件标签对话框模版
         newEventTag:'<div class="setting-list event-tag-setting"  style="width:350px;">\
-                    <input type="hidden" data-key="labletype" class="input-text tag-key" value="2"/>\
+                    <input type="hidden" data-key="labelType" class="input-text tag-key" value="2"/>\
                     <dl class="fd-clr"><dt>标签名称:</dt><dd><input type="text"  data-key="title"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>当前元素选择器:</dt><dd><input type="text"  data-key="selector"  class="input-text tag-key"/></dd></dl>\
                     <dl class="fd-clr"><dt>事件类型:</dt><dd><input type="text"   data-key="eventType" class="input-text tag-key"/></dd></dl>\
@@ -79,7 +79,6 @@
         //默认标题
         defaultTitle:'<span class="title tag-key" data-key="title">标签</span>\
                       <a href="#" class="button" data-button="expand">展开</a>\
-                      <a href="#" class="button" data-button="delete">删除</a>\
                       <span href="#" class="resize-bar">&#47;&#47;</span>',
         //默认操作栏
         defaultOpbar:'<a href="#" class="button" data-button="confirm">确定</a>\

@@ -32,7 +32,7 @@
                 output={
                     tagId:from.id,
                     title:from.functionname,
-                    labletype:from.labletype,
+                    labelType:from.labletype,
                     pos:from.pos?JSON.parse(from.pos):null,
                     size:from.size?JSON.parse(from.size):null,
                     css:from.css?JSON.parse(from.css):null,
@@ -60,11 +60,11 @@
             },
             attach:function(){
               var self=this;
-              //¼ÓÔØËùÓÐ±êÇ©
+              //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ç©
               Notify.attach('loadTags',function(data){
                   self.loadTags(data);
               })
-              //Ð¶ÔØ±êÇ©
+              //Ð¶ï¿½Ø±ï¿½Ç©
               .attach('unloadTags',function(data){
                   self.unload();
               });  

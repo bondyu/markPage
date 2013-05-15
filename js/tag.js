@@ -26,23 +26,25 @@
                  tagDetailHtml,
                  tagEditHtml;
              //设置模版内容
-             if (data.labletype == "1"){
-            	 tagDetailHtml = Template.normalTag;
-            	 tagEditHtml = Template.newNormalTag;
-             } else if (data.labletype == "2"){
-            	 tagDetailHtml = Template.eventTag;
-            	 tagEditHtml = Template.newEventTag;
-             } else if (data.labletype == "3"){
-            	 tagDetailHtml = Template.simpleTag;
-            	 tagEditHtml = Template.newSimpleTag;
-             }  
-             this.setTemplate(Template.defaultTitle,tagDetailHtml, Template.tagOpbar);
-             /**
-              *增加事件标签样式 
-              */
-             if(data.labletype =="2"){
-                 dom.addClass('pmdialog-tag-event');
+             switch(data.labelType-0){
+                case 3:
+                    tagDetailHtml = Template.simpleTag;
+                    tagEditHtml = Template.newSimpleTag;
+                    dom.addClass('pmdialog-tag-simple');
+                    break;
+                
+                case 2:
+                    tagDetailHtml = Template.eventTag;
+                    tagEditHtml = Template.newEventTag;
+                    dom.addClass('pmdialog-tag-event');
+                    break;
+                default:
+                    tagDetailHtml = Template.normalTag;
+                    tagEditHtml = Template.newNormalTag;
+                    break;
+                
              }
+             this.setTemplate(Template.defaultTitle,tagDetailHtml, Template.tagOpbar);
              //设定位置
              if(data.pos){
                  this.setPosition({
@@ -182,12 +184,12 @@
              function processData(putin){
                  var putout;
                  if(putin.size&&putin.size.width){
-                    putin.size.width-=94;
+                    putin.size.width-=54;
                  }
                  putout={
                     id:putin.tagId,
                     functionName:putin.title,
-                    lableType:putin.labletype,
+                    lableType:putin.labelType,
                     pos:putin.pos,
                     size:putin.size,
                     css:putin.css,

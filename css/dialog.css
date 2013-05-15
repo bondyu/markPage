@@ -55,6 +55,9 @@
 .pmdialog.pmdialog-tag-event.pmdialog-tag-fold{
 	background-color:#ACE1AF;
 }
+.pmdialog.pmdialog-tag-simple.pmdialog-tag-fold{
+	background-color:#00ccdd;
+}
 .pmdialog.pmdialog-tag-fold{
 	background-color:#FFA07B;
 }
@@ -112,7 +115,7 @@
     background-image: linear-gradient(top, #fcfcfc, #e4e4e4);
 }
 /**
- * 	ÉèÖÃÒ³Ãæ²ÎÊýµÄ¶Ô»°¿ò
+ * 	ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶Ô»ï¿½ï¿½ï¿½
  */
 .pmdialog .setting-list{
 }
